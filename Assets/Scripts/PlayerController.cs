@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CharacterController2D : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 10f;
     [SerializeField] private float _dashDistance = 30f;
@@ -10,6 +10,7 @@ public class CharacterController2D : MonoBehaviour
 
     private Rigidbody2D _rb;
     private SpriteRenderer _sr;
+    private TrailRenderer _tr;
     
     private Vector2 _movement;
     private Vector2 _dashDirection;
@@ -23,6 +24,7 @@ public class CharacterController2D : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _sr = GetComponent<SpriteRenderer>();
+        _tr = GetComponent<TrailRenderer>();
         _originalColor = _sr.color;
     }
 
@@ -65,6 +67,8 @@ public class CharacterController2D : MonoBehaviour
     private IEnumerator Dash()
     {
         _isDashing = true;
+        _tr.emitting = true;
+        
         float elapsedTime = 0f;
 
         while (elapsedTime < _dashDuration)
@@ -75,6 +79,7 @@ public class CharacterController2D : MonoBehaviour
         }
         
         _isDashing = false;
+        _tr.emitting = false;
 
         // Start cooldown for the next dash
         StartCoroutine(DashCooldown());
