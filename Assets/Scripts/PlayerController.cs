@@ -68,22 +68,29 @@ public class PlayerController : MonoBehaviour
     {
         _isDashing = true;
         _tr.emitting = true;
-        
+
         float elapsedTime = 0f;
+        float dashSpeed = (_dashDistance / _dashDuration);
 
         while (elapsedTime < _dashDuration)
         {
             elapsedTime += Time.deltaTime;
-            _rb.MovePosition(_rb.position + _dashDirection * (_dashDistance / _dashDuration) * Time.deltaTime);
+
+            // Calculate velocity and clamp it
+            Vector2 velocity = _dashDirection * dashSpeed;
+            velocity = Vector2.ClampMagnitude(velocity, dashSpeed * 0.9f);
+
+            _rb.MovePosition(_rb.position + velocity * Time.deltaTime);
             yield return null;
         }
-        
+
         _isDashing = false;
         _tr.emitting = false;
 
         // Start cooldown for the next dash
         StartCoroutine(DashCooldown());
     }
+
 
     private IEnumerator DashCooldown()
     {
