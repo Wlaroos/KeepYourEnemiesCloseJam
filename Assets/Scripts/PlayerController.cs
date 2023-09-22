@@ -1,8 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance { get; private set; }
+    
     [SerializeField] private float _moveSpeed = 10f;
     [SerializeField] private float _dashDistance = 30f;
     [SerializeField] private float _dashDuration = 0.1f;
@@ -15,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 _movement;
     private Vector2 _dashDirection;
     
-    private bool _isDashing = false;
+    public bool IsDashing = false;
     private bool _canDash = true;
     
     private Color _originalColor;
@@ -26,12 +29,21 @@ public class PlayerController : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
         _tr = GetComponent<TrailRenderer>();
         _originalColor = _sr.color;
+        
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); // Ensures only one instance exists
+        }
     }
 
     private void Update()
     {
         // Handle dashing
-            if (Input.GetButtonDown("Dash") && !_isDashing && _canDash)
+            if (Input.GetButtonDown("Dash") && !IsDashing && _canDash)
             {
                 StartCoroutine(Dash());
             }
@@ -58,7 +70,7 @@ public class PlayerController : MonoBehaviour
             _dashDirection = _movement;
         }
         
-        if (!_isDashing)
+        if (!IsDashing)
         {
             _rb.MovePosition(_rb.position + direction * _moveSpeed * Time.fixedDeltaTime);
         }
@@ -66,7 +78,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        _isDashing = true;
+        IsDashing = true;
         _tr.emitting = true;
 
         float elapsedTime = 0f;
@@ -84,7 +96,7 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
-        _isDashing = false;
+        IsDashing = false;
         _tr.emitting = false;
 
         // Start cooldown for the next dash
