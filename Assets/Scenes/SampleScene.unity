@@ -805,7 +805,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1826,6 +1826,8 @@ MonoBehaviour:
   _dashDistance: 50
   _dashDuration: 0.1
   _dashCooldown: 0.75
+  _ac: {fileID: 9100000, guid: 5973f12bd878d014591e073242c6e44c, type: 2}
+  _acSword: {fileID: 9100000, guid: 149f1a7fd42329743be73616eda7aef7, type: 2}
   IsDashing: 0
 --- !u!61 &2135567783
 BoxCollider2D:

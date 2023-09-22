@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,13 +11,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _dashDuration = 0.1f;
     [SerializeField] private float _dashCooldown = 1f;
 
+    [SerializeField] private AnimatorController _ac;
+    [SerializeField] private AnimatorController _acSword;
+
     private Rigidbody2D _rb;
     private SpriteRenderer _sr;
+    private Animator _anim;
     private TrailRenderer _tr;
     
     private Vector2 _movement;
     private Vector2 _dashDirection;
-    
+
     public bool IsDashing = false;
     private bool _canDash = true;
     
@@ -26,7 +31,10 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _sr = GetComponent<SpriteRenderer>();
+        _anim = GetComponent<Animator>();
         _tr = GetComponent<TrailRenderer>();
+        
+        _anim.runtimeAnimatorController = _ac;
         _originalColor = _sr.color;
         
         if (Instance == null)
@@ -44,7 +52,13 @@ public class PlayerController : MonoBehaviour
         // Handle dashing
             if (Input.GetButtonDown("Dash") && !IsDashing && _canDash)
             {
+                _anim.SetBool("isDashing",true);
                 StartCoroutine(Dash());
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                PickUpSword();
             }
     }
 
@@ -59,10 +73,25 @@ public class PlayerController : MonoBehaviour
         // Handle movement input
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
-
+        
         // Normalize the movement vector to ensure constant speed in all directions
         _movement.Normalize();
-
+        
+        _anim.SetFloat("Speed", Mathf.Abs(_movement.magnitude));
+        
+        
+        // FLIPPING SPRITE
+        if (_movement.x > 0)
+        {
+            // Player is moving right, flip the sprite to face right
+            _sr.flipX = false;
+        }
+        else if (_movement.x < 0)
+        {
+            // Player is moving left, flip the sprite to face left
+            _sr.flipX = true;
+        }
+        
         // Store dash direction regardless of movement
         if (_movement != Vector2.zero)
         {
@@ -97,12 +126,11 @@ public class PlayerController : MonoBehaviour
 
         IsDashing = false;
         _tr.emitting = false;
-
+        
         // Start cooldown for the next dash
         StartCoroutine(DashCooldown());
     }
-
-
+    
     private IEnumerator DashCooldown()
     {
         _canDash = false;
@@ -114,7 +142,18 @@ public class PlayerController : MonoBehaviour
 
         // Reset the sprite color to the original color
         _sr.color = _originalColor;
+        
 
         _canDash = true;
+    }
+
+    private void DashEnd()
+    { 
+        _anim.SetBool("isDashing",false); 
+    }
+
+    public void PickUpSword()
+    {
+        _anim.runtimeAnimatorController = _acSword;
     }
 }
