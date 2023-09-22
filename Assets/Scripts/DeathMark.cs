@@ -3,13 +3,14 @@ using UnityEngine;
 public class DeathMark : MonoBehaviour
 {
     private DeathMarkManager _dmm;
+    private SpriteRenderer _sr;
     
     private bool _isCreated = false;
     private bool _isActivated = false;
 
     private void Awake()
     {
-        
+        _sr = GetComponent<SpriteRenderer>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -24,15 +25,24 @@ public class DeathMark : MonoBehaviour
 
     private void CreateMark()
     {
-        _isCreated = true;
-        _dmm.MarkCreated(this);
-        Debug.Log("MARK CREATED");
+        if (!_isCreated && !_isActivated)
+        {
+            _isCreated = true;
+            _dmm.MarkCreated(this);
+            Debug.Log("MARK CREATED");
+            _sr.color = Color.magenta;
+        }
     }
 
     public void ActivateMark()
     {
-        Debug.Log("MARK ACTIVATED");
-        _isActivated = true;
+        if (!_isActivated && _isCreated)
+        {
+            Debug.Log("MARK ACTIVATED");
+            _isActivated = true;
+            GetComponent<Shooter>()?.MarkActivated();
+            _sr.color = Color.blue;
+        }
     }
 
     public void SetMarkManager(DeathMarkManager manager)

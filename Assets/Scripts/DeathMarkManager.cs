@@ -5,6 +5,7 @@ public class DeathMarkManager : MonoBehaviour
 {
     private List<DeathMark> _markList = new List<DeathMark>();
     private List<DeathMark> _createdList = new List<DeathMark>();
+    [SerializeField] private ShockwaveManager _shockwaveManager;
 
     private void Awake()
     {
@@ -28,11 +29,7 @@ public class DeathMarkManager : MonoBehaviour
             // Check if the sorted contents of _markList and _createdList are the same
             if (ListsAreEqual(_markList, _createdList))
             {
-                Debug.Log("ACTIVATED");
-                foreach (DeathMark dm in _createdList)
-                {
-                    dm.ActivateMark();
-                }
+                Invoke(nameof(ActivateMarks), 0.5f);
             }
         }
         else
@@ -54,6 +51,16 @@ public class DeathMarkManager : MonoBehaviour
 
         // Check if the sets are equal
         return set1.SetEquals(set2);
+    }
+    
+    private void ActivateMarks()
+    {                Debug.Log("ACTIVATED");
+        foreach (DeathMark dm in _createdList)
+        {
+            dm.ActivateMark();
+            // Let the player activate this later
+            _shockwaveManager.CallShockwave(PlayerController.Instance.transform.position);
+        }
     }
 
 }

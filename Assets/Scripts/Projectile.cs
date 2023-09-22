@@ -39,7 +39,8 @@ public class Projectile : MonoBehaviour
             Debug.Log("DASHED THROUGH");
         }
         
-        if (other.CompareTag("Wall"))
+        // Wall and Shockwave collisions
+        if (other.gameObject.layer is 7 or 8)
         {
             RemoveProjectile();
         }

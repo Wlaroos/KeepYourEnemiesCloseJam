@@ -11,6 +11,8 @@ public class Shooter : MonoBehaviour
 
     private bool _isShooting = false;
 
+    private bool _isMarkActivated = false;
+
     private void Update()
     {
         Attack();
@@ -18,7 +20,7 @@ public class Shooter : MonoBehaviour
 
     public void Attack()
     {
-        if (!_isShooting)
+        if (!_isShooting && !_isMarkActivated)
         {
             StartCoroutine(ShootRoutine());
         }
@@ -30,22 +32,30 @@ public class Shooter : MonoBehaviour
 
         for (int i = 0; i < _burstCount; i++)
         {
-            Vector2 _targetDirection = PlayerController.Instance.transform.position - transform.position;
-
-            //GameObject bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
-            GameObject bullet = _bulletPool.GetBullet();
-            bullet.transform.position = transform.position;
-            bullet.transform.right = _targetDirection;
-
-            if (bullet.TryGetComponent(out Projectile projectile))
+            if (!_isMarkActivated)
             {
-                projectile.UpdateMoveSpeed(_bulletMoveSpeed);
-            }
+                Vector2 _targetDirection = PlayerController.Instance.transform.position - transform.position;
 
-            yield return new WaitForSeconds(_timeBetweenBursts);
+                //GameObject bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+                GameObject bullet = _bulletPool.GetBullet();
+                bullet.transform.position = transform.position;
+                bullet.transform.right = _targetDirection;
+
+                if (bullet.TryGetComponent(out Projectile projectile))
+                {
+                    projectile.UpdateMoveSpeed(_bulletMoveSpeed);
+                }
+
+                yield return new WaitForSeconds(_timeBetweenBursts);
+            }
         }
 
         yield return new WaitForSeconds(_restTime);
         _isShooting = false;
+    }
+
+    public void MarkActivated()
+    {
+        _isMarkActivated = true;
     }
 }
