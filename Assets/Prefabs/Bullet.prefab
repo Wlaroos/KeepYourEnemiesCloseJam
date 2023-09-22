@@ -144,5 +144,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 22
-  _projectileLifeTime: 4
+  _projectileLifeTime: 10
   _particleOnHit: {fileID: 2654090441497941774, guid: 0707cdc30e6fbd2439c4b31cc2746df8, type: 3}

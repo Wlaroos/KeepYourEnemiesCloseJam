@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -13,7 +10,7 @@ public class Projectile : MonoBehaviour
     
     private void OnEnable()
     {
-        //Invoke(nameof(RemoveProjectile), _projectileLifeTime);
+        Invoke(nameof(RemoveProjectile), _projectileLifeTime);
     }
 
     private void Update()
@@ -63,5 +60,6 @@ public class Projectile : MonoBehaviour
         //Maybe pool particles later
         Instantiate(_particleOnHit, transform.position, transform.rotation);
         _bulletPool.ReturnBullet(gameObject);
+        CancelInvoke();
     }
 }
