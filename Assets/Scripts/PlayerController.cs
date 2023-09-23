@@ -6,25 +6,34 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance { get; private set; }
     
+    [Header("Movement")]
     [SerializeField] private float _moveSpeed = 10f;
+    [Header("Dash")]
     [SerializeField] private float _dashDistance = 30f;
     [SerializeField] private float _dashDuration = 0.1f;
     [SerializeField] private float _dashCooldown = 1f;
-
+    [Header("Animations")]
+    [SerializeField] private bool _startWithSword;
+    [Space(10)]
     [SerializeField] private AnimatorController _ac;
     [SerializeField] private AnimatorController _acSword;
 
+    // Components
     private Rigidbody2D _rb;
     private SpriteRenderer _sr;
     private Animator _anim;
     private TrailRenderer _tr;
     
+    //Movement and Dash Vectors
     private Vector2 _movement;
     private Vector2 _dashDirection;
 
-    public bool IsDashing = false;
+    // Movement and Dash booleans
+    public bool CanMove { get; private set; }
+    public bool IsDashing { get; private set; }
     private bool _canDash = true;
     
+    // Color
     private Color _originalColor;
 
     private void Awake()
@@ -42,29 +51,36 @@ public class PlayerController : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
         _anim = GetComponent<Animator>();
         _tr = GetComponent<TrailRenderer>();
-        
-        _anim.runtimeAnimatorController = _ac;
+
+        _anim.runtimeAnimatorController = _startWithSword ? _acSword : _ac;
+
+        CanMove = true;
+
         _originalColor = _sr.color;
     }
 
     private void Update()
     {
         // Handle dashing
-            if (Input.GetButtonDown("Dash") && !IsDashing && _canDash)
-            {
-                StartCoroutine(Dash());
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Z))
-            {
-                PickUpSword();
-            }
+        if (Input.GetButtonDown("Dash") && !IsDashing && _canDash && CanMove)
+        {
+            StartCoroutine(Dash());
+        }
+        
+        // FOR TESTING
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            PickUpSword();
+        }
     }
 
     private void FixedUpdate()
     {
         // Move the character
-        MoveCharacter(_movement);
+        if (CanMove)
+        {
+            MoveCharacter(_movement);
+        }
     }
 
     private void MoveCharacter(Vector2 direction)
@@ -77,7 +93,6 @@ public class PlayerController : MonoBehaviour
         _movement.Normalize();
         
         _anim.SetFloat("Speed", Mathf.Abs(_movement.magnitude));
-        
         
         // FLIPPING SPRITE
         if (_movement.x > 0)
@@ -152,6 +167,11 @@ public class PlayerController : MonoBehaviour
     { 
         _anim.SetBool("isDashing",false); 
     }
+
+    private void UnsheathEnd()
+    {
+        _anim.SetTrigger("Aura"); 
+    }
     
     // Changes Animation Controller
     public void PickUpSword()
@@ -161,6 +181,7 @@ public class PlayerController : MonoBehaviour
 
     public void ReadyToExecute()
     {
-        
+        CanMove = false;
+        _anim.SetTrigger("Unsheath");
     }
 }

@@ -17,8 +17,7 @@ public class RotateHoverUtil : MonoBehaviour
     private Vector3 _posOffset = new Vector3();
     private Vector3 _tempPos = new Vector3();
 
-    private float _sine;
-    public float Sine => _sine;
+    public float Sine { get; private set; }
 
     private void Awake()
     {
@@ -53,8 +52,8 @@ public class RotateHoverUtil : MonoBehaviour
         {
             _tempPos = _posOffset;
 
-            _sine = Mathf.Sin(_localTime * Mathf.PI * _frequency);
-            _tempPos.y += (_sine * _amplitude);
+            Sine = Mathf.Sin(_localTime * Mathf.PI * _frequency);
+            _tempPos.y += (Sine * _amplitude);
 
             transform.localPosition = _tempPos;
         }

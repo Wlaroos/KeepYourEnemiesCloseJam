@@ -59,7 +59,10 @@ public class CameraController : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(0, 0, -playerDirection * _tiltDegrees);
 
         // Smoothly interpolate the camera's rotation to the target rotation
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10.0f);
+        if (PlayerController.Instance.CanMove)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10.0f);
+        }
     }
 
     public void StartZoomIn(float targetZoom, float duration)

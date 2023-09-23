@@ -40,7 +40,7 @@ public class DeathMark : MonoBehaviour
         {
             _isCreated = true;
             _dmm.MarkCreated(this);
-            Debug.Log("MARK CREATED");
+            //Debug.Log("MARK CREATED");
             _dmsr.color = new Color32(25,25,25,255);
             //_sr.color = Color.magenta;
         }
@@ -50,7 +50,7 @@ public class DeathMark : MonoBehaviour
     {
         if (!_isActivated && _isCreated)
         {
-            Debug.Log("MARK ACTIVATED");
+            //Debug.Log("MARK ACTIVATED");
             _isActivated = true;
             GetComponent<Shooter>()?.MarkActivated();
             _dmsr.color = new Color32(150,0,0,255);
