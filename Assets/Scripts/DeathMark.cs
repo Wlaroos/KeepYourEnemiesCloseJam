@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 public class DeathMark : MonoBehaviour
 {
+    [SerializeField] private GameObject _deathMarkPrefab;
     private DeathMarkManager _dmm;
     private SpriteRenderer _sr;
+    private SpriteRenderer _dmsr;
     
     private bool _isCreated = false;
     private bool _isActivated = false;
@@ -11,6 +14,14 @@ public class DeathMark : MonoBehaviour
     private void Awake()
     {
         _sr = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
+        GameObject dmHolder = Instantiate(_deathMarkPrefab, new Vector2(transform.position.x ,transform.position.y + 1.5f), Quaternion.identity, transform);
+        _dmsr = dmHolder.GetComponent<SpriteRenderer>();
+
+        _dmsr.color = Color.clear;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -30,7 +41,8 @@ public class DeathMark : MonoBehaviour
             _isCreated = true;
             _dmm.MarkCreated(this);
             Debug.Log("MARK CREATED");
-            _sr.color = Color.magenta;
+            _dmsr.color = new Color32(25,25,25,255);
+            //_sr.color = Color.magenta;
         }
     }
 
@@ -41,7 +53,8 @@ public class DeathMark : MonoBehaviour
             Debug.Log("MARK ACTIVATED");
             _isActivated = true;
             GetComponent<Shooter>()?.MarkActivated();
-            _sr.color = Color.blue;
+            _dmsr.color = new Color32(150,0,0,255);
+            //_sr.color = Color.blue;
         }
     }
 
