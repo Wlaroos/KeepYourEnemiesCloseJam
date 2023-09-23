@@ -2125,7 +2125,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2614248409525380842, guid: 9ae86c3b6aafa9e4687a0c75268f64b9, type: 3}
       propertyPath: _shockwaveTime
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2303234203759508534, guid: 9ae86c3b6aafa9e4687a0c75268f64b9, type: 3}
       propertyPath: m_Name

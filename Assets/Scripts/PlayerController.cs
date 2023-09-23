@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
         // Handle dashing
             if (Input.GetButtonDown("Dash") && !IsDashing && _canDash)
             {
-                _anim.SetBool("isDashing",true);
                 StartCoroutine(Dash());
             }
             
@@ -108,6 +107,8 @@ public class PlayerController : MonoBehaviour
     {
         IsDashing = true;
         _tr.emitting = true;
+        _anim.SetBool("isDashing",true);
+        _anim.SetTrigger("Dash");
 
         float elapsedTime = 0f;
         float dashSpeed = (_dashDistance / _dashDuration);
@@ -146,12 +147,14 @@ public class PlayerController : MonoBehaviour
 
         _canDash = true;
     }
-
+    
+    // Animation Event
     private void DashEnd()
     { 
         _anim.SetBool("isDashing",false); 
     }
-
+    
+    // Changes Animation Controller
     public void PickUpSword()
     {
         _anim.runtimeAnimatorController = _acSword;
