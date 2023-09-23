@@ -3,12 +3,22 @@ using UnityEngine;
 
 public class DeathMarkManager : MonoBehaviour
 {
+    public static DeathMarkManager Instance { get; private set; }
+    
     private List<DeathMark> _markList = new List<DeathMark>();
     private List<DeathMark> _createdList = new List<DeathMark>();
-    [SerializeField] private ShockwaveManager _shockwaveManager;
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); // Ensures only one instance exists
+        }
+        
         // Find all DeathMark objects in the scene and add them to _markList
         DeathMark[] deathMarks = FindObjectsOfType<DeathMark>();
 
@@ -59,7 +69,10 @@ public class DeathMarkManager : MonoBehaviour
         {
             dm.ActivateMark();
             // Let the player activate this later
-            _shockwaveManager.CallShockwave(PlayerController.Instance.transform.position);
+            ShockwaveManager.Instance.CallShockwave(PlayerController.Instance.transform.position);
+            PlayerController.Instance.ReadyToExecute();
+            CameraController.Instance.StartZoomIn(4f, 1f);
+            Time.timeScale = 0.25f;
         }
     }
 

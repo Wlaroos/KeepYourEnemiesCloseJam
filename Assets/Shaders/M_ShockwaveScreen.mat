@@ -45,6 +45,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Sharpness: 2
     - _ShockwaveStrength: -0.1
     - _Size: 0.05
     - _WaveDistanceFromCenter: 0.25

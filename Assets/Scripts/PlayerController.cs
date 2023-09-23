@@ -29,14 +29,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _sr = GetComponent<SpriteRenderer>();
-        _anim = GetComponent<Animator>();
-        _tr = GetComponent<TrailRenderer>();
-        
-        _anim.runtimeAnimatorController = _ac;
-        _originalColor = _sr.color;
-        
         if (Instance == null)
         {
             Instance = this;
@@ -45,6 +37,14 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(gameObject); // Ensures only one instance exists
         }
+        
+        _rb = GetComponent<Rigidbody2D>();
+        _sr = GetComponent<SpriteRenderer>();
+        _anim = GetComponent<Animator>();
+        _tr = GetComponent<TrailRenderer>();
+        
+        _anim.runtimeAnimatorController = _ac;
+        _originalColor = _sr.color;
     }
 
     private void Update()
@@ -144,7 +144,6 @@ public class PlayerController : MonoBehaviour
         // Reset the sprite color to the original color
         _sr.color = _originalColor;
         
-
         _canDash = true;
     }
     
@@ -158,5 +157,10 @@ public class PlayerController : MonoBehaviour
     public void PickUpSword()
     {
         _anim.runtimeAnimatorController = _acSword;
+    }
+
+    public void ReadyToExecute()
+    {
+        
     }
 }
