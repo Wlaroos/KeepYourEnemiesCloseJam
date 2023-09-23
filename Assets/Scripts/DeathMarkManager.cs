@@ -71,7 +71,7 @@ public class DeathMarkManager : MonoBehaviour
             // Let the player activate this later
             ShockwaveManager.Instance.CallShockwave(PlayerController.Instance.transform.position);
             PlayerController.Instance.ReadyToExecute();
-            CameraController.Instance.StartZoomIn(4f, 1f);
+            CameraController.Instance.StartZoomIn(4f, .25f);
             Time.timeScale = 0.25f;
         }
     }

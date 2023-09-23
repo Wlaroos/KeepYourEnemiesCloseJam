@@ -18,7 +18,7 @@ public class DeathMark : MonoBehaviour
 
     private void Start()
     {
-        GameObject dmHolder = Instantiate(_deathMarkPrefab, new Vector2(transform.position.x ,transform.position.y + 1.5f), Quaternion.identity, transform);
+        GameObject dmHolder = Instantiate(_deathMarkPrefab, new Vector2(transform.position.x ,transform.position.y + 1.25f), Quaternion.identity, transform);
         _dmsr = dmHolder.GetComponent<SpriteRenderer>();
 
         _dmsr.color = Color.clear;

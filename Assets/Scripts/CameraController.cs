@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour
     
     private BoxCollider2D _cameraBounds;  // Reference to the box collider for camera bounds
     private Transform _followTransform;  // Reference to the player's transform
+    [SerializeField] private float _tiltDegrees = 1.0f;
 
     private void Awake()
     {
@@ -52,6 +53,13 @@ public class CameraController : MonoBehaviour
         desiredPosition.y = Mathf.Clamp(desiredPosition.y, boundsMinY, boundsMaxY);
 
         transform.position = desiredPosition;
+        
+        // Calculate the tilt based on the player's movement direction
+        float playerDirection = (Input.GetAxis("Horizontal"));
+        Quaternion targetRotation = Quaternion.Euler(0, 0, -playerDirection * _tiltDegrees);
+
+        // Smoothly interpolate the camera's rotation to the target rotation
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10.0f);
     }
 
     public void StartZoomIn(float targetZoom, float duration)
@@ -67,7 +75,12 @@ public class CameraController : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            cameraComponent.orthographicSize = Mathf.Lerp(initialZoom, targetZoom, elapsedTime / duration);
+            float t = elapsedTime / duration;
+            
+            // Smooth interpolation using SmoothStep
+            t = Mathf.SmoothStep(0f, 1f, t);
+
+            cameraComponent.orthographicSize = Mathf.Lerp(initialZoom, targetZoom, t);
 
             // Recalculate camera dimensions based on the updated orthographic size
             float cameraHeight = 2.0f * cameraComponent.orthographicSize;
@@ -92,4 +105,5 @@ public class CameraController : MonoBehaviour
 
         cameraComponent.orthographicSize = targetZoom;
     }
+
 }
