@@ -97,9 +97,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32dff498ac7490c42b24c049c5db4c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usesLocalTime: 1
-  canRotate: 0
-  degreesPerSecond: {x: 0, y: 0, z: 0}
-  canHover: 1
-  amplitude: 0.25
-  frequency: 1
+  _usesLocalTime: 1
+  _canRotate: 0
+  _canRotateBackAndForth: 1
+  _canHover: 1
+  _degreesPerSecond: {x: 0, y: 0, z: 15}
+  _amplitude: 0.125
+  _frequency: 1
