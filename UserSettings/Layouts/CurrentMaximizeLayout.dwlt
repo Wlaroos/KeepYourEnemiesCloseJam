@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 50770
+  controlID: 78730
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 50771
+  controlID: 78731
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 50772
+  controlID: 78732
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -236,9 +236,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 266e0000
-      m_LastClickedID: 28198
-      m_ExpandedIDs: ccb8fdffe01ffeff7838ffff1afbffff1a6e0000266e0000366e0000426e0000686e0000
+      m_SelectedIDs: 189afcff
+      m_LastClickedID: -222696
+      m_ExpandedIDs: 30e7faff5612fbffe0b6fbff300bfcff420bfcff7416fcffccb8fdffe01ffeff7838ffff1afbffff1a6e0000266e0000366e0000426e0000686e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -673,9 +673,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -6.569773, y: 1.2635036, z: 0.40379462}
+    m_Target: {x: 1.8579035, y: -3.417522, z: -0.0028142445}
     speed: 2
-    m_Value: {x: -6.569773, y: 1.2635036, z: 0.40379462}
+    m_Value: {x: 1.9250114, y: -3.4298909, z: -0.002114223}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -725,9 +725,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 10.705861
+    m_Target: 1.6256195
     speed: 2
-    m_Value: 10.705861
+    m_Value: 1.5556167
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -897,7 +897,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 50796
+  controlID: 78756
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -969,7 +969,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/TextMesh Pro/Resources/Fonts & Materials
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -977,16 +977,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/TextMesh Pro/Resources/Fonts & Materials
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Unity\Projects\KeepYourEnemiesCloseJam
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ca700000
-    m_LastClickedID: 28874
-    m_ExpandedIDs: 00000000506f0000c6700000ce700000deb9000000ca9a3b
+    scrollPos: {x: 0, y: 83}
+    m_SelectedIDs: 4cd10000
+    m_LastClickedID: 53580
+    m_ExpandedIDs: 00000000506f0000c6700000deb9000030d1000038d1000010d2000012d2000014d2000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1014,7 +1014,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000506f0000c6700000ce700000deb9000000ca9a3b
+    m_ExpandedIDs: 00000000506f0000c6700000deb9000038d1000010d2000012d2000014d2000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1039,10 +1039,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 266e0000
-    m_LastClickedInstanceID: 28198
+    m_SelectedInstanceIDs: 189afcff
+    m_LastClickedInstanceID: -222696
     m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c6230000ee6d000000000000
+    m_ExpandedInstanceIDs: c6230000ee6d000000000000a012fcff
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1197,7 +1197,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 118
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
