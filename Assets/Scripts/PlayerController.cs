@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using TMPro;
-using UnityEditor.Animations;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,8 +15,8 @@ public class PlayerController : MonoBehaviour
     [Header("Animations")]
     [SerializeField] private bool _startWithSword;
     [Space(10)]
-    [SerializeField] private AnimatorController _ac;
-    [SerializeField] private AnimatorController _acSword;
+    [SerializeField] private RuntimeAnimatorController _ac;
+    [SerializeField] private RuntimeAnimatorController _acSword;
     [Header("Other")] 
     [SerializeField] private Material _flashMat;
     [SerializeField] private GameObject _teleTrail;
@@ -82,7 +79,7 @@ public class PlayerController : MonoBehaviour
             PickUpSword();
         }
         
-        if (Input.GetKeyDown(KeyCode.E) && _isCharged)
+        if (Input.GetKeyDown(KeyCode.E) && _isCharged && Time.timeScale < 1)
         {
             StartCoroutine(Teleporting());
             // Text Scales In
@@ -128,9 +125,9 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash()
     {
-         IsDashing = true;
+        IsDashing = true;
         _tr.emitting = true;
-        _anim.SetBool("isDashing",true);
+        _anim.SetBool("isDashing", true);
         _anim.SetTrigger("Dash");
 
         float elapsedTime = 0f;
@@ -138,22 +135,23 @@ public class PlayerController : MonoBehaviour
 
         while (elapsedTime < _dashDuration)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.fixedDeltaTime;
 
             // Calculate velocity and clamp it
             Vector2 velocity = _dashDirection * dashSpeed;
             velocity = Vector2.ClampMagnitude(velocity, dashSpeed * 0.9f);
 
-            _rb.MovePosition(_rb.position + velocity * Time.deltaTime);
-            yield return null;
+            _rb.MovePosition(_rb.position + velocity * Time.fixedDeltaTime);
+            yield return new WaitForFixedUpdate();
         }
 
         IsDashing = false;
         _tr.emitting = false;
-        
+
         // Start cooldown for the next dash
         StartCoroutine(DashCooldown());
     }
+
     
     private IEnumerator DashCooldown()
     {
@@ -199,7 +197,8 @@ public class PlayerController : MonoBehaviour
             var position = mark.transform.position;
             
             // Teleport Sprite
-            transform.position = new Vector2(position.x +randomDirection,position.y -.25f);
+            //_rb.MovePosition(new Vector2(position.x +randomDirection,position.y -.25f));
+            transform.position = new Vector2(position.x + randomDirection, position.y - .25f);
             // Flip Sprite
             Flip(-randomDirection);
             _anim.SetTrigger("Slice");
@@ -210,9 +209,11 @@ public class PlayerController : MonoBehaviour
         }
 
         // Flip To the right, teleport to center of scene
-        transform.GetChild(1).GetComponent<TrailRenderer>().emitting = false;
         Flip(1);
-        transform.position = Vector2.zero;
+        _rb.MovePosition(Vector2.zero);
+        
+        yield return new WaitForSeconds(.05f);
+        transform.GetChild(1).GetComponent<TrailRenderer>().emitting = false;
     }
 
     private void Flip(float input)
@@ -245,7 +246,7 @@ public class PlayerController : MonoBehaviour
         {
             _isCharged = true;
             // Change pos based on whether the player is above or below the center of the scene
-            transform.GetChild(0).localPosition = transform.position.y >= 0 ? new Vector2(0, -1) : new Vector2(0, 2);
+            transform.GetChild(0).localPosition = transform.position.y >= 0 ? new Vector2(0, -1) : new Vector2(0, 2.5f);
             // Text Scales In
             transform.GetChild(0).GetComponent<TextWobble>().ScaleText(new Vector2(0.75f, 0.75f), 0.125f);
         }

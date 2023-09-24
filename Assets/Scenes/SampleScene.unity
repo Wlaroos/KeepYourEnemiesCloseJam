@@ -2541,7 +2541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 10
-  _dashDistance: 50
+  _dashDistance: 5
   _dashDuration: 0.1
   _dashCooldown: 0.75
   _startWithSword: 1

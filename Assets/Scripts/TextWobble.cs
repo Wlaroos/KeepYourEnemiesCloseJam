@@ -191,7 +191,7 @@ public class TextWobble : MonoBehaviour
             float t = elapsedTime / duration;
             _textMesh.rectTransform.localScale = Vector2.Lerp(initialScale, targetScale, t);
 
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.fixedDeltaTime;
             yield return null;
         }
 
