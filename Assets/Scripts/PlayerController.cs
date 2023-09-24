@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [Space(10)]
     [SerializeField] private AnimatorController _ac;
     [SerializeField] private AnimatorController _acSword;
+    [Header("Flash")] 
+    [SerializeField] private Material _flashMat;
 
     // Components
     private Rigidbody2D _rb;
@@ -150,35 +153,41 @@ public class PlayerController : MonoBehaviour
     private IEnumerator DashCooldown()
     {
         _canDash = false;
-
-        // Flash the sprite red
-        _sr.color = Color.red;
+        Material oldMat =  _sr.material;
         
         yield return new WaitForSeconds(_dashCooldown);
-
-        // Reset the sprite color to the original color
-        _sr.color = _originalColor;
         
+        _sr.material = _flashMat;
+        
+        yield return new WaitForSeconds(0.15f);
+        
+        _sr.material = oldMat;
+
         _canDash = true;
     }
-    
-    // Animation Event
-    private void DashEnd()
-    { 
-        _anim.SetBool("isDashing",false); 
-    }
 
-    private void UnsheathEnd()
-    {
-        _anim.SetTrigger("Aura"); 
-    }
     
     // Changes Animation Controller
     public void PickUpSword()
     {
         _anim.runtimeAnimatorController = _acSword;
     }
-
+    
+    // Animation Events
+    private void DashEnd()
+    { 
+        _anim.SetBool("isDashing",false); 
+    }
+    private void UnsheathEnd()
+    {
+        _anim.SetTrigger("Aura"); 
+        transform.GetChild(0).GetComponent<TMP_Text>().enabled = true;
+    }
+    public void AuraEnd()
+    {
+        
+    }
+    
     public void ReadyToExecute()
     {
         CanMove = false;
