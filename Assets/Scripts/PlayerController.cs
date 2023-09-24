@@ -214,6 +214,10 @@ public class PlayerController : MonoBehaviour
         
         yield return new WaitForSeconds(.05f);
         transform.GetChild(1).GetComponent<TrailRenderer>().emitting = false;
+        
+        yield return new WaitForSeconds(.5f);
+        _sr.color = Color.clear;
+        SnapshotManager.Instance.Callback();
     }
 
     private void Flip(float input)

@@ -8,7 +8,6 @@ public class CameraController : MonoBehaviour
     
     private BoxCollider2D _cameraBounds;  // Reference to the box collider for camera bounds
     private Transform _followTransform;  // Reference to the player's transform
-    private bool _canTilt = true;
     [SerializeField] private float _tiltDegrees = 1.0f;
 
     private void Awake()
@@ -113,10 +112,4 @@ public class CameraController : MonoBehaviour
 
         cameraComponent.orthographicSize = targetZoom;
     }
-
-    public void CantTilt()
-    {
-        _canTilt = false;
-    }
-
 }
