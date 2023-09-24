@@ -245,7 +245,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures:
-    - texture: {fileID: 2800000, guid: be7e1f8f91fd6b64f96b2ce14eccf028, type: 3}
+    - texture: {fileID: 2800000, guid: c3e42f84d75406e4e80bbdb4c4382a40, type: 3}
       name: _EmissionMap
     nameFileIdTable:
       Parry_0: 1996828892
