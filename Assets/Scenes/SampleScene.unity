@@ -519,9 +519,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPool: {fileID: 70621263}
   _bulletMoveSpeed: 5
+  _startingDistance: 0.1
   _burstCount: 3
+  _projectilesPerBurst: 1
+  _angleSpread: 0
   _timeBetweenBursts: 0.25
   _restTime: 1
+  _stagger: 0
+  _oscillate: 0
 --- !u!212 &479421983
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -967,9 +972,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPool: {fileID: 70621263}
   _bulletMoveSpeed: 5
+  _startingDistance: 0.1
   _burstCount: 3
+  _projectilesPerBurst: 1
+  _angleSpread: 0
   _timeBetweenBursts: 0.25
   _restTime: 1
+  _stagger: 0
+  _oscillate: 0
 --- !u!114 &722955866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1062,9 +1072,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPool: {fileID: 70621263}
   _bulletMoveSpeed: 5
+  _startingDistance: 0.1
   _burstCount: 3
+  _projectilesPerBurst: 1
+  _angleSpread: 0
   _timeBetweenBursts: 0.25
   _restTime: 1
+  _stagger: 0
+  _oscillate: 0
 --- !u!212 &971809384
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2277,9 +2292,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPool: {fileID: 70621263}
   _bulletMoveSpeed: 5
+  _startingDistance: 0.1
   _burstCount: 3
+  _projectilesPerBurst: 1
+  _angleSpread: 0
   _timeBetweenBursts: 0.25
   _restTime: 1
+  _stagger: 0
+  _oscillate: 0
 --- !u!212 &1738254458
 SpriteRenderer:
   m_ObjectHideFlags: 0
