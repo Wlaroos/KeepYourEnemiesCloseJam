@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEditor.Animations;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,8 +20,9 @@ public class PlayerController : MonoBehaviour
     [Space(10)]
     [SerializeField] private AnimatorController _ac;
     [SerializeField] private AnimatorController _acSword;
-    [Header("Flash")] 
+    [Header("Other")] 
     [SerializeField] private Material _flashMat;
+    [SerializeField] private GameObject _teleTrail;
 
     // Components
     private Rigidbody2D _rb;
@@ -35,9 +38,8 @@ public class PlayerController : MonoBehaviour
     public bool CanMove { get; private set; }
     public bool IsDashing { get; private set; }
     private bool _canDash = true;
-    
-    // Color
-    private Color _originalColor;
+
+    private bool _isCharged;
 
     private void Awake()
     {
@@ -58,8 +60,12 @@ public class PlayerController : MonoBehaviour
         _anim.runtimeAnimatorController = _startWithSword ? _acSword : _ac;
 
         CanMove = true;
+    }
 
-        _originalColor = _sr.color;
+    private void Start()
+    {
+        // Dash trail gets fucky if I don't do this
+        Instantiate(_teleTrail, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity, transform);
     }
 
     private void Update()
@@ -74,6 +80,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             PickUpSword();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.E) && _isCharged)
+        {
+            StartCoroutine(Teleporting());
+            // Text Scales In
+            transform.GetChild(0).GetComponent<TextWobble>().ScaleText(Vector2.zero, 0.5f);
+            _anim.SetTrigger("CrouchIdle"); 
         }
     }
 
@@ -97,17 +111,8 @@ public class PlayerController : MonoBehaviour
         
         _anim.SetFloat("Speed", Mathf.Abs(_movement.magnitude));
         
-        // FLIPPING SPRITE
-        if (_movement.x > 0)
-        {
-            // Player is moving right, flip the sprite to face right
-            _sr.flipX = false;
-        }
-        else if (_movement.x < 0)
-        {
-            // Player is moving left, flip the sprite to face left
-            _sr.flipX = true;
-        }
+        // Flip Sprite
+        Flip(_movement.x);
         
         // Store dash direction regardless of movement
         if (_movement != Vector2.zero)
@@ -123,7 +128,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        IsDashing = true;
+         IsDashing = true;
         _tr.emitting = true;
         _anim.SetBool("isDashing",true);
         _anim.SetTrigger("Dash");
@@ -165,12 +170,64 @@ public class PlayerController : MonoBehaviour
 
         _canDash = true;
     }
-
     
     // Changes Animation Controller
     public void PickUpSword()
     {
         _anim.runtimeAnimatorController = _acSword;
+    }
+    
+    private IEnumerator Teleporting()
+    {
+        Time.timeScale = 1;
+        
+        // Zoom Camera Out
+        CameraController.Instance.StartZoomIn(8, .5f);
+        yield return new WaitForSeconds(.25f);
+        
+        // Start Shockwave
+        ShockwaveManager.Instance.CallShockwave(PlayerController.Instance.transform.position);
+        yield return new WaitForSeconds(1.25f);
+
+        _sr.sortingOrder = 5;
+        transform.GetChild(1).GetComponent<TrailRenderer>().emitting = true;
+
+        // Teleport to each enemy with a mark.
+        foreach (DeathMark mark in DeathMarkManager.Instance._createdList)
+        {
+            int randomDirection = (Random.value < 0.5f) ? 1 : -1;
+            var position = mark.transform.position;
+            
+            // Teleport Sprite
+            transform.position = new Vector2(position.x +randomDirection,position.y -.25f);
+            // Flip Sprite
+            Flip(-randomDirection);
+            _anim.SetTrigger("Slice");
+            
+            // Do anims and other shit
+            // Destroy Marks?
+            yield return new WaitForSeconds(.5f);
+        }
+
+        // Flip To the right, teleport to center of scene
+        transform.GetChild(1).GetComponent<TrailRenderer>().emitting = false;
+        Flip(1);
+        transform.position = Vector2.zero;
+    }
+
+    private void Flip(float input)
+    {
+        // FLIPPING SPRITE
+        if (input > 0)
+        {
+            // Player is moving right, flip the sprite to face right
+            _sr.flipX = false;
+        }
+        else if (input < 0)
+        {
+            // Player is moving left, flip the sprite to face left
+            _sr.flipX = true;
+        }
     }
     
     // Animation Events
@@ -181,11 +238,17 @@ public class PlayerController : MonoBehaviour
     private void UnsheathEnd()
     {
         _anim.SetTrigger("Aura"); 
-        transform.GetChild(0).GetComponent<TMP_Text>().enabled = true;
     }
     public void AuraEnd()
     {
-        
+        if (!_isCharged)
+        {
+            _isCharged = true;
+            // Change pos based on whether the player is above or below the center of the scene
+            transform.GetChild(0).localPosition = transform.position.y >= 0 ? new Vector2(0, -1) : new Vector2(0, 2);
+            // Text Scales In
+            transform.GetChild(0).GetComponent<TextWobble>().ScaleText(new Vector2(0.75f, 0.75f), 0.125f);
+        }
     }
     
     public void ReadyToExecute()

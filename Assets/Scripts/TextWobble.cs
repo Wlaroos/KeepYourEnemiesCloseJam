@@ -173,5 +173,30 @@ public class TextWobble : MonoBehaviour
     {
         return new Vector2(Mathf.Sin(time * 3.3f) / 25, Mathf.Cos(time * 2.5f) / 25);
     }
+    
+    // Function to scale the text (zoom in or out) over a specified duration
+    public void ScaleText(Vector2 targetFontSize, float duration)
+    {
+        StartCoroutine(AnimateTextScaling(targetFontSize, duration));
+    }
+    
+    // Coroutine to scale the text over a specified duration
+    private IEnumerator AnimateTextScaling(Vector2 targetScale, float duration)
+    {
+        Vector2 initialScale = _textMesh.rectTransform.localScale;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            float t = elapsedTime / duration;
+            _textMesh.rectTransform.localScale = Vector2.Lerp(initialScale, targetScale, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        _textMesh.rectTransform.localScale = targetScale;  // Ensure we reach the target scale exactly
+    }
+
 
 }

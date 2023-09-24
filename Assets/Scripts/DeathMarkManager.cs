@@ -6,7 +6,7 @@ public class DeathMarkManager : MonoBehaviour
     public static DeathMarkManager Instance { get; private set; }
     
     private List<DeathMark> _markList = new List<DeathMark>();
-    private List<DeathMark> _createdList = new List<DeathMark>();
+    public List<DeathMark> _createdList = new List<DeathMark>();
 
     private void Awake()
     {

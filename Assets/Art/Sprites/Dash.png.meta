@@ -244,7 +244,9 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures: []
+    secondaryTextures:
+    - texture: {fileID: 2800000, guid: 43fad9da714c3df43ba481e0d642449c, type: 3}
+      name: _EmissionMap
     nameFileIdTable:
       Dash_0: 1696894348
       Dash_1: 1442594565
