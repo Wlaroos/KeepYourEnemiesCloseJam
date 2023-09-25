@@ -13512,7 +13512,7 @@ MonoBehaviour:
   _startWithSword: 1
   _ac: {fileID: 9100000, guid: 5973f12bd878d014591e073242c6e44c, type: 2}
   _acSword: {fileID: 9100000, guid: 149f1a7fd42329743be73616eda7aef7, type: 2}
-  _unlockedDash: 1
+  _unlockedDash: 0
   _teleTrail: {fileID: 1144487113742749329, guid: b051aa0f7437a244aace552cf29f657d, type: 3}
 --- !u!61 &2135567783
 BoxCollider2D:
@@ -13783,7 +13783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthPrefab: {fileID: 3462812389981531424, guid: cd8505174b3c1aa4cab97bb43f9b5176, type: 3}
   _emptyHeart: {fileID: 15069419, guid: 0a5f4fef24fde3a4c8f85e8d2aaf5baa, type: 3}
-  _maxHealth: 21
+  _maxHealth: 2
   _invincibilityDuration: 2
 --- !u!95 &2135567789
 Animator:

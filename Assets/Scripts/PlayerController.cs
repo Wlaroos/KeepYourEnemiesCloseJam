@@ -305,6 +305,7 @@ public class PlayerController : MonoBehaviour
         CanMove = false;
         transform.GetChild(2).gameObject.SetActive(false);
         StopAllCoroutines();
+        _sr.color = Color.white;
         PlayerHealth.Instance.SetInvincible();
         _anim.SetTrigger("Unsheath");
     }
