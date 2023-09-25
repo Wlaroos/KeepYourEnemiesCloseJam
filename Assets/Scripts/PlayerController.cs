@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [Space(10)]
     [SerializeField] private RuntimeAnimatorController _ac;
     [SerializeField] private RuntimeAnimatorController _acSword;
+    [Header("Unlocks")] 
+    [SerializeField] private bool _unlockedDash = false;
     [Header("Other")] 
     [SerializeField] private GameObject _teleTrail;
     
@@ -35,8 +38,11 @@ public class PlayerController : MonoBehaviour
     public bool CanMove { get; private set; }
     public bool IsDashing { get; private set; }
     private bool _canDash = true;
-
     private bool _isCharged;
+    
+    // Dash Input Buffer
+    private float _dashBufferTime = 0.25f; // Adjust this value to set the buffer time in seconds
+    private float _lastDashInputTime = -1000; // Store the time of the last dash input
 
     private void Awake()
     {
@@ -62,14 +68,21 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        if(!_unlockedDash) {transform.GetChild(2).gameObject.SetActive(false);}
         // Dash trail gets fucky if I don't do this
         Instantiate(_teleTrail, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity, transform);
     }
 
     private void Update()
     {
-        // Handle dashing
-        if (Input.GetButtonDown("Dash") && !IsDashing && _canDash && CanMove)
+        // Update the last dash input time
+        if (Input.GetButtonDown("Dash") && _unlockedDash)
+        {
+            _lastDashInputTime = Time.time;
+        }
+        
+        // Handle dashing with a buffer time
+        if (Time.time <= _lastDashInputTime + _dashBufferTime && !IsDashing && _canDash && CanMove && _unlockedDash)
         {
             StartCoroutine(Dash());
         }
@@ -80,7 +93,7 @@ public class PlayerController : MonoBehaviour
             PickUpSword();
         }
         
-        if (Input.GetKeyDown(KeyCode.E) && _isCharged && Time.timeScale < 1)
+        if (Input.GetButtonDown("Select")  && _isCharged && Time.timeScale < 1)
         {
             StartCoroutine(Teleporting());
             // Text Scales In
@@ -265,8 +278,13 @@ public class PlayerController : MonoBehaviour
     }
     private void UnsheathEnd()
     {
-        _anim.SetTrigger("Aura"); 
-        
+        _anim.SetTrigger("Aura");
+
+        // If Controller Change Text
+        if (Input.GetJoystickNames().Length > 0)
+        {
+            transform.GetChild(0).GetComponent<TMP_Text>().text = "Press X";
+        }
         // Change pos based on whether the player is above or below the center of the scene
         transform.GetChild(0).localPosition = transform.position.y >= 0 ? new Vector2(0, -1) : new Vector2(0, 2.5f);
         // Text Scales In
@@ -285,6 +303,7 @@ public class PlayerController : MonoBehaviour
     public void ReadyToExecute()
     {
         CanMove = false;
+        transform.GetChild(2).gameObject.SetActive(false);
         StopAllCoroutines();
         PlayerHealth.Instance.SetInvincible();
         _anim.SetTrigger("Unsheath");
