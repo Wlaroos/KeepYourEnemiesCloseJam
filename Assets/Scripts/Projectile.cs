@@ -5,6 +5,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float _moveSpeed = 22f;
     [SerializeField] private float _projectileLifeTime = 2f;
     [SerializeField] private GameObject _particleOnHit;
+    [SerializeField] private GameObject _particleDashed;
 
     private BulletPool _bulletPool;
     
@@ -35,8 +36,7 @@ public class Projectile : MonoBehaviour
         }
         else if(!other.isTrigger && player && player.IsDashing)
         {
-            // Nothing for now, maybe add special effect for dashing through a bullet
-            Debug.Log("DASHED THROUGH");
+            RemoveProjectileDash();
         }
         
         // Wall and Shockwave collisions
@@ -60,6 +60,14 @@ public class Projectile : MonoBehaviour
     {
         //Maybe pool particles later
         Instantiate(_particleOnHit, transform.position, transform.rotation);
+        _bulletPool.ReturnBullet(gameObject);
+        CancelInvoke();
+    }
+    
+    private void RemoveProjectileDash()
+    {
+        //Maybe pool particles later
+        Instantiate(_particleDashed, transform.position, transform.rotation);
         _bulletPool.ReturnBullet(gameObject);
         CancelInvoke();
     }

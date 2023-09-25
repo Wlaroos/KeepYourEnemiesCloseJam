@@ -276,6 +276,7 @@ public class PlayerController : MonoBehaviour
     public void ReadyToExecute()
     {
         CanMove = false;
+        StopAllCoroutines();
         PlayerHealth.Instance.SetInvincible();
         _anim.SetTrigger("Unsheath");
     }

@@ -155,11 +155,12 @@ public class PlayerHealth : MonoBehaviour
     public void SetInvincible()
     {
         _isInvincible = true;
+        StopAllCoroutines();
     }
     
     private void Death()
     {
         Debug.Log("Death");
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

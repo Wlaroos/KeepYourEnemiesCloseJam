@@ -146,3 +146,4 @@ MonoBehaviour:
   _moveSpeed: 22
   _projectileLifeTime: 10
   _particleOnHit: {fileID: 2654090441497941774, guid: 0707cdc30e6fbd2439c4b31cc2746df8, type: 3}
+  _particleDashed: {fileID: 2654090441497941774, guid: ddb423cd49afb5d4d86b4c051ef41c6e, type: 3}
