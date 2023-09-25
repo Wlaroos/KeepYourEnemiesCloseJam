@@ -187,9 +187,13 @@ public class PlayerController : MonoBehaviour
         ShockwaveManager.Instance.CallShockwave(PlayerController.Instance.transform.position);
         yield return new WaitForSeconds(1.25f);
 
-        _sr.sortingOrder = 5;
+        _sr.sortingOrder = 2;
         transform.GetChild(1).GetComponent<TrailRenderer>().emitting = true;
 
+        // Set the initial delay and minimum clamp
+        float initialDelay = .75f;
+        float minDelay = 0.05f;
+        
         // Teleport to each enemy with a mark.
         foreach (DeathMark mark in DeathMarkManager.Instance._createdList)
         {
@@ -205,7 +209,9 @@ public class PlayerController : MonoBehaviour
             
             // Do anims and other shit
             // Destroy Marks?
-            yield return new WaitForSeconds(.5f);
+            initialDelay = Mathf.Clamp(initialDelay * 0.9f, minDelay, initialDelay);
+            
+            yield return new WaitForSeconds(initialDelay);
         }
 
         // Flip To the right, teleport to center of scene
@@ -214,10 +220,18 @@ public class PlayerController : MonoBehaviour
         
         yield return new WaitForSeconds(.05f);
         transform.GetChild(1).GetComponent<TrailRenderer>().emitting = false;
-        SnapshotManager.Instance.Callback();
+
+        initialDelay = .75f;
         
-        yield return new WaitForSeconds(.5f);
-        _sr.color = Color.clear;
+        foreach (DeathMark mark in DeathMarkManager.Instance._createdList)
+        {
+            mark.Death();
+            initialDelay = Mathf.Clamp(initialDelay * 0.9f, minDelay, initialDelay);
+            yield return new WaitForSeconds(initialDelay);
+        }
+
+        yield return new WaitForSeconds(1f);
+        SnapshotManager.Instance.Callback();
     }
 
     private void Flip(float input)
@@ -243,17 +257,20 @@ public class PlayerController : MonoBehaviour
     private void UnsheathEnd()
     {
         _anim.SetTrigger("Aura"); 
-    }
-    public void AuraEnd()
-    {
+        
+        // Change pos based on whether the player is above or below the center of the scene
+        transform.GetChild(0).localPosition = transform.position.y >= 0 ? new Vector2(0, -1) : new Vector2(0, 2.5f);
+        // Text Scales In
+        transform.GetChild(0).GetComponent<TextWobble>().ScaleText(new Vector2(0.75f, 0.75f), 1.5f);
+        
         if (!_isCharged)
         {
             _isCharged = true;
-            // Change pos based on whether the player is above or below the center of the scene
-            transform.GetChild(0).localPosition = transform.position.y >= 0 ? new Vector2(0, -1) : new Vector2(0, 2.5f);
-            // Text Scales In
-            transform.GetChild(0).GetComponent<TextWobble>().ScaleText(new Vector2(0.75f, 0.75f), 0.125f);
         }
+    }
+    public void AuraEnd()
+    {
+        // Shockwave? ScreenShake? Sounds?
     }
     
     public void ReadyToExecute()

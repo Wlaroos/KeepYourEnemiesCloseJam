@@ -1,17 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Cleanup : MonoBehaviour
 {
 
+    [SerializeField] private float _timeToDestroy = 2f;
+    
     private void Awake()
     {
-        Invoke(nameof(Delt),2f);
+        Invoke(nameof(Delt),_timeToDestroy);
     }
 
     private void Delt()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }
