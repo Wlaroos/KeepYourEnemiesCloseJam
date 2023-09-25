@@ -20,6 +20,7 @@ public class LevelFadeManager : MonoBehaviour
 
     void Start()
     {
+        transform.GetChild(0).GetComponent<Renderer>().sortingOrder = 2;
         StartLevel();
         _levelName.text = "[ " + SceneManager.GetActiveScene().name + " ]";
     }

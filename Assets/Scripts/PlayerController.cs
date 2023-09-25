@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private RuntimeAnimatorController _ac;
     [SerializeField] private RuntimeAnimatorController _acSword;
     [Header("Other")] 
-    [SerializeField] private Material _flashMat;
     [SerializeField] private GameObject _teleTrail;
     
     // Components
@@ -26,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _sr;
     private Animator _anim;
     private TrailRenderer _tr;
+    private SpriteRenderer _dashBar;
     
     //Movement and Dash Vectors
     private Vector2 _movement;
@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
         _anim = GetComponent<Animator>();
         _tr = GetComponent<TrailRenderer>();
+        _dashBar = transform.GetChild(2).GetChild(0).GetComponent<SpriteRenderer>();
 
         _anim.runtimeAnimatorController = _startWithSword ? _acSword : _ac;
 
@@ -156,18 +157,26 @@ public class PlayerController : MonoBehaviour
     private IEnumerator DashCooldown()
     {
         _canDash = false;
-        Material oldMat =  _sr.material;
-        
-        yield return new WaitForSeconds(_dashCooldown);
-        
-        _sr.material = _flashMat;
-        
-        yield return new WaitForSeconds(0.15f);
-        
-        _sr.material = oldMat;
+        Color oldColor = _dashBar.material.color;
+        _dashBar.material.color = Color.red;
 
+        // Calculate the increment needed for the dash bar to reach 0.85 over the cooldown duration
+        float sizeIncrement = 0.85f / _dashCooldown;
+        float currentSize = 0f;
+
+        while (currentSize < 0.85f)
+        {
+            currentSize += sizeIncrement * Time.deltaTime;
+            _dashBar.size = new Vector2(currentSize, 0.075f);
+
+            yield return null;
+        }
+
+        _dashBar.size = new Vector2(0.85f, 0.075f);
+        _dashBar.material.color = oldColor;
         _canDash = true;
     }
+
     
     // Changes Animation Controller
     public void PickUpSword()
@@ -188,7 +197,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1.25f);
 
         _sr.sortingOrder = 2;
-        transform.GetChild(2).GetComponent<TrailRenderer>().emitting = true;
+        transform.GetChild(3).GetComponent<TrailRenderer>().emitting = true;
 
         // Set the initial delay and minimum clamp
         float initialDelay = .75f;
@@ -219,7 +228,7 @@ public class PlayerController : MonoBehaviour
         _rb.MovePosition(new Vector2(0, -0.5f));
         
         yield return new WaitForSeconds(.05f);
-        transform.GetChild(2).GetComponent<TrailRenderer>().emitting = false;
+        transform.GetChild(3).GetComponent<TrailRenderer>().emitting = false;
 
         initialDelay = .75f;
         
