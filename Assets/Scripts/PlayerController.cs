@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1.25f);
 
         _sr.sortingOrder = 2;
-        transform.GetChild(1).GetComponent<TrailRenderer>().emitting = true;
+        transform.GetChild(2).GetComponent<TrailRenderer>().emitting = true;
 
         // Set the initial delay and minimum clamp
         float initialDelay = .75f;
@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour
         _rb.MovePosition(new Vector2(0, -0.5f));
         
         yield return new WaitForSeconds(.05f);
-        transform.GetChild(1).GetComponent<TrailRenderer>().emitting = false;
+        transform.GetChild(2).GetComponent<TrailRenderer>().emitting = false;
 
         initialDelay = .75f;
         
@@ -276,6 +276,7 @@ public class PlayerController : MonoBehaviour
     public void ReadyToExecute()
     {
         CanMove = false;
+        PlayerHealth.Instance.SetInvincible();
         _anim.SetTrigger("Unsheath");
     }
 }

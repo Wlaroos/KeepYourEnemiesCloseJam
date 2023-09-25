@@ -64,15 +64,16 @@ public class DeathMarkManager : MonoBehaviour
     }
     
     private void ActivateMarks()
-    {                Debug.Log("ACTIVATED");
+    {
+        // Let the player activate this later
+        ShockwaveManager.Instance.CallShockwave(PlayerController.Instance.transform.position);
+        PlayerController.Instance.ReadyToExecute();
+        CameraController.Instance.StartZoomIn(4f, .25f);
+        Time.timeScale = 0.25f;
+        
         foreach (DeathMark dm in _createdList)
         {
             dm.ActivateMark();
-            // Let the player activate this later
-            ShockwaveManager.Instance.CallShockwave(PlayerController.Instance.transform.position);
-            PlayerController.Instance.ReadyToExecute();
-            CameraController.Instance.StartZoomIn(4f, .25f);
-            Time.timeScale = 0.25f;
         }
     }
 
