@@ -14,6 +14,9 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private GameObject _player;
     [SerializeField] private GameObject _enemy;
     [SerializeField] private GameObject _sword;
+
+    [SerializeField] private Rigidbody2D _cloud1;
+    [SerializeField] private Rigidbody2D _cloud2;
     
     // Start is called before the first frame update
     void Start()
@@ -34,6 +37,9 @@ public class CutsceneManager : MonoBehaviour
 
     private IEnumerator Cutscene()
     {
+        _cloud1.velocity = new Vector2(.25f, 0);
+        _cloud2.velocity = new Vector2(-0.125f, 0);
+        
         yield return new WaitForSeconds(2f);
 
         var enemies = GameObject.FindObjectsOfType<Rigidbody2D>();
