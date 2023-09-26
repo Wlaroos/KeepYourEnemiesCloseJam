@@ -77,4 +77,12 @@ public class DeathMarkManager : MonoBehaviour
         }
     }
 
+    public void PlayerDeath()
+    {
+        foreach (var mark in _markList)
+        {
+            mark.GetComponent<Shooter>()?.MarkActivated();
+        }
+    }
+
 }

@@ -130,6 +130,11 @@ public class SnapshotManager : MonoBehaviour
         TMP_Text tx = transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
         tx.color = new Color(1, 1, 1, 0);
         
+        if (Input.GetJoystickNames().Length > 0)
+        {
+            tx.text = "Press X To Continue";
+        }
+        
         yield return new WaitForSeconds(1f);
 
         _allowExit = true;

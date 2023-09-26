@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -18,9 +19,16 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private Rigidbody2D _cloud1;
     [SerializeField] private Rigidbody2D _cloud2;
     
+    [SerializeField] private TMP_Text _skipText;
+    
     // Start is called before the first frame update
     void Start()
     {
+        if (Input.GetJoystickNames().Length > 0)
+        {
+            _skipText.text = "Press X To Skip";
+        }
+        
         _player.transform.GetChild(0).GetComponent<ParticleSystem>().Pause();
         _player.transform.GetChild(0).GetComponent<ParticleSystem>().Clear();
         StartCoroutine(Cutscene());

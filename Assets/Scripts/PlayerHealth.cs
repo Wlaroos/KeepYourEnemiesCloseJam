@@ -166,7 +166,11 @@ public class PlayerHealth : MonoBehaviour
     
     private void Death()
     {
-        Debug.Log("Death");
-        //Destroy(gameObject);
+        ShockwaveManager.Instance.CallShockwave(PlayerController.Instance.transform.position);
+        PlayerController.Instance.CanMove = false;
+        PlayerController.Instance.HideDashBar();
+        GetComponent<Animator>().SetTrigger("Death");
+        DeathMarkManager.Instance.PlayerDeath();
+        
     }
 }

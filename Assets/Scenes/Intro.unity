@@ -1564,6 +1564,7 @@ MonoBehaviour:
   _sword: {fileID: 829855005}
   _cloud1: {fileID: 2099165167}
   _cloud2: {fileID: 991721205}
+  _skipText: {fileID: 621708437}
 --- !u!4 &744844265
 Transform:
   m_ObjectHideFlags: 0

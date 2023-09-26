@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool _unlockedDash = false;
     [Header("Other")] 
     [SerializeField] private GameObject _teleTrail;
+    [SerializeField] private GameObject _bleedParticles;
+    [SerializeField] private GameObject _deathParticles;
     
     // Components
     private Rigidbody2D _rb;
@@ -29,13 +31,14 @@ public class PlayerController : MonoBehaviour
     private Animator _anim;
     private TrailRenderer _tr;
     private SpriteRenderer _dashBar;
+    private SpriteRenderer _dashBarBG;
     
     //Movement and Dash Vectors
     private Vector2 _movement;
     private Vector2 _dashDirection;
 
     // Movement and Dash booleans
-    public bool CanMove { get; private set; }
+    public bool CanMove { get; set; }
     public bool IsDashing { get; private set; }
     private bool _canDash = true;
     private bool _isCharged;
@@ -59,6 +62,7 @@ public class PlayerController : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
         _anim = GetComponent<Animator>();
         _tr = GetComponent<TrailRenderer>();
+        _dashBarBG = transform.GetChild(2).GetComponent<SpriteRenderer>();
         _dashBar = transform.GetChild(2).GetChild(0).GetComponent<SpriteRenderer>();
 
         _anim.runtimeAnimatorController = _startWithSword ? _acSword : _ac;
@@ -298,6 +302,22 @@ public class PlayerController : MonoBehaviour
     public void AuraEnd()
     {
         // Shockwave? ScreenShake? Sounds?
+    }
+    public void DeathEnd()
+    {
+        Instantiate(_bleedParticles, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
+        _anim.SetTrigger("Bleed");
+    }
+    public void BleedEnd()
+    {
+        _sr.color = Color.clear;
+        Instantiate(_deathParticles, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
+        LoseMenu.Instance.StartFade();
+    }
+    public void HideDashBar()
+    {
+        _dashBar.color = Color.clear;
+        _dashBarBG.color = Color.clear;
     }
     
     public void ReadyToExecute()
