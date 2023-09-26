@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class SnapshotManager : MonoBehaviour
@@ -11,6 +13,8 @@ public class SnapshotManager : MonoBehaviour
     private GameObject _quadBottom;
     private GameObject _bg;
     private TrailRenderer _tr;
+
+    private bool _allowExit = false;
     
     private void Awake()
     {
@@ -27,6 +31,14 @@ public class SnapshotManager : MonoBehaviour
         _quadBottom = transform.GetChild(1).gameObject;
         _quadTop = transform.GetChild(2).gameObject;
         _tr = transform.GetChild(3).GetComponent<TrailRenderer>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Select") && _allowExit)
+        {
+            SceneManager.LoadScene (SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     public void Callback()
@@ -114,5 +126,25 @@ public class SnapshotManager : MonoBehaviour
         _quadBottom.GetComponent<Rigidbody>().AddForce(0, Random.Range(-8, -5), 0, ForceMode.Impulse);
         _quadTop.GetComponent<Rigidbody>().AddTorque(0, 0, Random.Range(-8, -6) * direction, ForceMode.Impulse);
         _quadBottom.GetComponent<Rigidbody>().AddTorque(0, 0, Random.Range(6, 8) * direction, ForceMode.Impulse);
+        
+        TMP_Text tx = transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
+        tx.color = new Color(1, 1, 1, 0);
+        
+        yield return new WaitForSeconds(1f);
+
+        _allowExit = true;
+        
+        float elapsedTime = 0f;
+
+        while (tx.color.a < 1)
+        {
+            float alpha = Mathf.Lerp(0f, 1f, elapsedTime / 2f);
+            Color newColor = new Color(tx.color.r, tx.color.g, tx.color.b, alpha);
+            tx.color = newColor;
+            
+            elapsedTime += Time.deltaTime * 2;
+            yield return null;
+        }
+        tx.color = new Color(tx.color.r, tx.color.g, tx.color.b, 1f);
     }
 }
