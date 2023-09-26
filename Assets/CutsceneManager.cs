@@ -63,10 +63,10 @@ public class CutsceneManager : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         _enemy.GetComponent<Rigidbody2D>().velocity = new Vector2(7.5f, 0);
         
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         Instantiate(_exclamationPoint, new Vector2(_player.transform.position.x + 1f, _player.transform.position.y + 1f), Quaternion.identity);
         
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.5f);
         _enemy.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0);
         _enemy.transform.GetChild(0).GetComponent<ParticleSystem>().Pause();
         _enemy.transform.GetChild(0).GetComponent<ParticleSystem>().Clear();
