@@ -213,7 +213,7 @@ public class PlayerController : MonoBehaviour
         transform.GetChild(3).GetComponent<TrailRenderer>().emitting = true;
 
         // Set the initial delay and minimum clamp
-        float initialDelay = .75f;
+        float initialDelay = .5f;
         float minDelay = 0.05f;
         
         // Teleport to each enemy with a mark.
@@ -243,7 +243,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(.05f);
         transform.GetChild(3).GetComponent<TrailRenderer>().emitting = false;
 
-        initialDelay = .75f;
+        initialDelay = .5f;
         
         foreach (DeathMark mark in DeathMarkManager.Instance._createdList)
         {

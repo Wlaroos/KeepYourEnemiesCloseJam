@@ -13512,7 +13512,7 @@ MonoBehaviour:
   _startWithSword: 1
   _ac: {fileID: 9100000, guid: 5973f12bd878d014591e073242c6e44c, type: 2}
   _acSword: {fileID: 9100000, guid: 149f1a7fd42329743be73616eda7aef7, type: 2}
-  _unlockedDash: 0
+  _unlockedDash: 1
   _teleTrail: {fileID: 1144487113742749329, guid: b051aa0f7437a244aace552cf29f657d, type: 3}
 --- !u!61 &2135567783
 BoxCollider2D:
