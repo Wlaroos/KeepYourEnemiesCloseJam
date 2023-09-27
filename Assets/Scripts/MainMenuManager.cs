@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
@@ -8,6 +7,9 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField] private GameObject _controlsCanvas;
     [SerializeField] private GameObject _mainCanvas;
+    [SerializeField] private EventSystem _eventSystem;
+    [SerializeField] private GameObject _resumeButton;
+    [SerializeField] private GameObject _controlsButton;
 
     public void StartGame()
     {
@@ -23,6 +25,7 @@ public class MainMenuManager : MonoBehaviour
     {
         _controlsCanvas.SetActive(true);
         _mainCanvas.SetActive(false);
+        _eventSystem.SetSelectedGameObject(_resumeButton);
     }
     
     public void ExitGame()
@@ -34,6 +37,7 @@ public class MainMenuManager : MonoBehaviour
     {
         _controlsCanvas.SetActive(false);
         _mainCanvas.SetActive(true);
+        _eventSystem.SetSelectedGameObject(_controlsButton);
     }
     
 }
