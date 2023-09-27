@@ -691,6 +691,7 @@ MonoBehaviour:
   _charMode: 1
   _applyOnlyToSelection: 0
   _textToChangeColor: 
+  _divideStrengthBy: 25
   _wobbleText: 1
   _wobblingSpeed: 1.5
   _colorText: 1

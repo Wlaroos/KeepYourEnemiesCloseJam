@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class TextWobble : MonoBehaviour
     [SerializeField] private bool _applyOnlyToSelection;
     [TextArea(5,5)]                             //make this area bigger if you need to add more lines
     [SerializeField] private string _textToChangeColor;
+    [SerializeField] private float _divideStrengthBy = 25f;
     private int _specificWordIndex;
     
     // Variables for Text Change
@@ -148,10 +150,13 @@ public class TextWobble : MonoBehaviour
                 
                 if (_colorText)
                 {
-                    colors[index] = Gradient.Evaluate(Mathf.Repeat(Time.time * _colorSpeed - _vertices[index].x * 0.001f, 1f));
-                    colors[index + 1] = Gradient.Evaluate(Mathf.Repeat(Time.time * _colorSpeed - _vertices[index + 1].x * 0.001f, 1f));
-                    colors[index + 2] = Gradient.Evaluate(Mathf.Repeat(Time.time * _colorSpeed - _vertices[index + 2].x * 0.001f, 1f));
-                    colors[index + 3] = Gradient.Evaluate(Mathf.Repeat(Time.time * _colorSpeed - _vertices[index + 3].x * 0.001f, 1f));
+                    if (Mathf.Repeat(Time.time * _colorSpeed - _vertices[index].x * 0.001f, 1f) >= 0)
+                    {
+                        colors[index] = Gradient.Evaluate(Mathf.Repeat(Time.time * _colorSpeed - _vertices[index].x * 0.001f, 1f));
+                        colors[index + 1] = Gradient.Evaluate(Mathf.Repeat(Time.time * _colorSpeed - _vertices[index + 1].x * 0.001f, 1f));
+                        colors[index + 2] = Gradient.Evaluate(Mathf.Repeat(Time.time * _colorSpeed - _vertices[index + 2].x * 0.001f, 1f));
+                        colors[index + 3] = Gradient.Evaluate(Mathf.Repeat(Time.time * _colorSpeed - _vertices[index + 3].x * 0.001f, 1f));
+                    }
                 }
 
                 if (_wobbleText)
@@ -171,7 +176,7 @@ public class TextWobble : MonoBehaviour
     
     Vector2 Wobble(float time)
     {
-        return new Vector2(Mathf.Sin(time * 3.3f) / 25, Mathf.Cos(time * 2.5f) / 25);
+        return new Vector2(Mathf.Sin(time * 3.3f) / _divideStrengthBy, Mathf.Cos(time * 2.5f) / _divideStrengthBy);
     }
     
     // Function to scale the text (zoom in or out) over a specified duration

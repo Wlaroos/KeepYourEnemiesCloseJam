@@ -29,6 +29,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] private float _attackStartDelay = 0.5f;
 
     private bool _isShooting = false;
+    private bool _hasAttacked = false;
     private bool _isMarkActivated = false;
     private bool _isDelayed = true;
     
@@ -64,15 +65,18 @@ public class Shooter : MonoBehaviour
     {
         if (!_isShooting && !_isMarkActivated && !_isDelayed)
         {
-            _anim.SetTrigger("Attack");
-            StartCoroutine(ShootRoutine());
+            if (_hasAttacked == false)
+            {
+                _anim.SetTrigger("Attack");
+                _hasAttacked = true;
+            }
         }
     }
 
     private IEnumerator ShootRoutine()
     {
         _isShooting = true;
-
+        
         float startAngle, currentAngle, angleStep, endAngle;
         float timeBetweenProjectiles = 0f;
         
@@ -104,6 +108,7 @@ public class Shooter : MonoBehaviour
             {
                 for (int j = 0; j < _projectilesPerBurst; j++)
                 {
+                    
                     Vector2 pos = FindBulletSpawnPos(currentAngle);
                     //GameObject bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
                     GameObject bullet = BulletPool.Instance.GetBullet();
@@ -129,6 +134,7 @@ public class Shooter : MonoBehaviour
         }
         yield return new WaitForSeconds(_restTime);
         _isShooting = false;
+        _hasAttacked = false;
     }
 
     private void TargetConeOfInfluence(out float startAngle, out float currentAngle, out float angleStep, out float endAngle)
@@ -164,6 +170,11 @@ public class Shooter : MonoBehaviour
     public void MarkActivated()
     {
         _isMarkActivated = true;
+    }
+
+    public void StartShootRoutine()
+    {
+        StartCoroutine(ShootRoutine());
     }
 
     public void BackToIdle()
