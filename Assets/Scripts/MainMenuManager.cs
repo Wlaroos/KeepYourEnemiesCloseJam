@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -8,8 +9,17 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject _controlsCanvas;
     [SerializeField] private GameObject _mainCanvas;
     [SerializeField] private EventSystem _eventSystem;
+    [SerializeField] private GameObject _startButton;
     [SerializeField] private GameObject _resumeButton;
     [SerializeField] private GameObject _controlsButton;
+
+    private void Start()
+    {
+        if (Input.GetJoystickNames().Length > 0)
+        {
+            _eventSystem.SetSelectedGameObject(_startButton);
+        }
+    }
 
     public void StartGame()
     {
@@ -25,7 +35,10 @@ public class MainMenuManager : MonoBehaviour
     {
         _controlsCanvas.SetActive(true);
         _mainCanvas.SetActive(false);
-        _eventSystem.SetSelectedGameObject(_resumeButton);
+        if (Input.GetJoystickNames().Length > 0)
+        {
+            _eventSystem.SetSelectedGameObject(_resumeButton);
+        }
     }
     
     public void ExitGame()
@@ -37,7 +50,10 @@ public class MainMenuManager : MonoBehaviour
     {
         _controlsCanvas.SetActive(false);
         _mainCanvas.SetActive(true);
-        _eventSystem.SetSelectedGameObject(_controlsButton);
+        if (Input.GetJoystickNames().Length > 0)
+        {
+            _eventSystem.SetSelectedGameObject(_controlsButton);
+        }
     }
     
 }
