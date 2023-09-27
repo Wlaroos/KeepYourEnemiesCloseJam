@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 08881b753f80c734281992300323acb3
+guid: 60324758eba3f064382ce6ffee8313b0
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -52,7 +52,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 256
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 8, y: 8, z: 8, w: 8}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -172,7 +172,9 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures: []
+    secondaryTextures:
+    - texture: {instanceID: 0}
+      name: _EmissionMap
     nameFileIdTable:
       Square: 7482667652216324306
   mipmapLimitGroupName: 
