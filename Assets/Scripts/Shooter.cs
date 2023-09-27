@@ -6,7 +6,6 @@ public class Shooter : MonoBehaviour
 {
     [Header("Pool Ref")]
     [SerializeField] private BulletPool _bulletPool;
-
     [Header("Bullet Info")] 
     [SerializeField] private Sprite[] _bulletArray;
     [SerializeField] private int _bulletIndex;
@@ -28,15 +27,23 @@ public class Shooter : MonoBehaviour
     private bool _isShooting = false;
     private bool _isMarkActivated = false;
 
+    private SpriteRenderer _sr;
+    private Transform _shootPos;
+    private float _originalXValue;
+
     private Animator _anim;
 
     private void Update()
     {
+        Flip();
         Attack();
     }
 
     private void Awake()
     {
+        _sr = GetComponent<SpriteRenderer>();
+        _shootPos = transform.GetChild(0);
+        _originalXValue = _shootPos.localPosition.x;
         _anim = GetComponent<Animator>();
     }
 
@@ -150,5 +157,22 @@ public class Shooter : MonoBehaviour
     public void BackToIdle()
     {
         _anim.SetTrigger("Idle");
+    }
+    
+    private void Flip()
+    {
+        Vector3 directionToPlayer = PlayerController.Instance.transform.position - transform.position;
+
+        // Flip the sprite based on the direction
+        if (directionToPlayer.x > 0)
+        {
+            _sr.flipX = false; // Face right
+            _shootPos.localPosition = new Vector2(_originalXValue,_shootPos.localPosition.y);
+        }
+        else
+        {
+            _sr.flipX = true; // Face left
+            _shootPos.localPosition = new Vector2(-_originalXValue,_shootPos.localPosition.y);
+        }
     }
 }

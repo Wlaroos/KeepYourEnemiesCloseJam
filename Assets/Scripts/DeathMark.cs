@@ -22,7 +22,7 @@ public class DeathMark : MonoBehaviour
 
     private void Start()
     {
-        GameObject dmHolder = Instantiate(_deathMarkPrefab, new Vector2(transform.position.x, transform.position.y + 1.25f), Quaternion.identity, transform);
+        GameObject dmHolder = Instantiate(_deathMarkPrefab, new Vector2(transform.position.x, transform.position.y + 1.75f), Quaternion.identity, transform);
         _dmsr = dmHolder.GetComponent<SpriteRenderer>();
 
         _dmsr.color = Color.clear;
@@ -95,7 +95,7 @@ public class DeathMark : MonoBehaviour
     
     public void Death()
     {
-        Instantiate(_killParticles, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)), transform);
+        Instantiate(_killParticles, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.Euler(0, 0, Random.Range(0, 360)), transform);
     }
 
     public void SetMarkManager(DeathMarkManager manager)
