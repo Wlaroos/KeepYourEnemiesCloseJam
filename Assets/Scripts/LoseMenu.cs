@@ -39,7 +39,7 @@ public class LoseMenu : MonoBehaviour
         transform.GetChild(0).GetComponent<Renderer>().sortingOrder = 2;
         if (Input.GetJoystickNames().Length > 0)
         {
-            _loseText.text = "--[ Executed ]--\n\nPress X To Restart\nPress B To Exit";
+            _loseText.text = "--[ Executed ]--\n\nPress X To Restart\nPress Select To Exit";
         }
     }
 
@@ -49,7 +49,7 @@ public class LoseMenu : MonoBehaviour
         {
             SceneManager.LoadScene (SceneManager.GetActiveScene().buildIndex);
         }
-        if (Input.GetButtonDown("Exit") && _canPress)
+        if (Input.GetButtonDown("ExitGame") && _canPress)
         {
             SceneManager.LoadScene(0);
         }
