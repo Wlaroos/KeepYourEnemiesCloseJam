@@ -228,7 +228,7 @@ public class PlayerController : MonoBehaviour
             
             // Teleport Sprite
             //_rb.MovePosition(new Vector2(position.x +randomDirection,position.y -.25f));
-            transform.position = new Vector2(position.x + randomDirection, position.y - .25f);
+            transform.position = new Vector2(position.x + randomDirection, position.y + .25f);
             // Flip Sprite
             Flip(-randomDirection);
             _anim.SetTrigger("Slice");

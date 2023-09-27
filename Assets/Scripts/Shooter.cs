@@ -22,10 +22,13 @@ public class Shooter : MonoBehaviour
     [SerializeField] private bool _stagger;
     [SerializeField] private bool _oscillate;
 
-    [Header("Animation Stuff")] [SerializeField] private bool _attackEachBurst;
+    [Header("Animation Stuff")] 
+    [SerializeField] private bool _attackEachBurst;
+    [SerializeField] private float _attackStartDelay = 0.5f;
 
     private bool _isShooting = false;
     private bool _isMarkActivated = false;
+    private bool _isDelayed = true;
 
     private SpriteRenderer _sr;
     private Transform _shootPos;
@@ -35,7 +38,10 @@ public class Shooter : MonoBehaviour
 
     private void Update()
     {
-        Flip();
+        if (!_isShooting && !_isMarkActivated)
+        {
+            Flip();
+        }
         Attack();
     }
 
@@ -47,9 +53,14 @@ public class Shooter : MonoBehaviour
         _anim = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        Invoke(nameof(DelayedStart), _attackStartDelay);
+    }
+
     public void Attack()
     {
-        if (!_isShooting && !_isMarkActivated)
+        if (!_isShooting && !_isMarkActivated && !_isDelayed)
         {
             _anim.SetTrigger("Attack");
             StartCoroutine(ShootRoutine());
@@ -89,7 +100,6 @@ public class Shooter : MonoBehaviour
             
             if (!_isMarkActivated)
             {
-                
                 for (int j = 0; j < _projectilesPerBurst; j++)
                 {
                     Vector2 pos = FindBulletSpawnPos(currentAngle);
@@ -97,8 +107,8 @@ public class Shooter : MonoBehaviour
                     GameObject bullet = _bulletPool.GetBullet();
                     bullet.GetComponent<SpriteRenderer>().sprite = _bulletArray[_bulletIndex];
                     bullet.transform.position = pos;
-                    bullet.transform.right = PlayerController.Instance.transform.position - bullet.transform.position;
-
+                    bullet.transform.right = bullet.transform.position - transform.position;
+                    
                     if (bullet.TryGetComponent(out Projectile projectile))
                     {
                         projectile.UpdateMoveSpeed(_bulletMoveSpeed);
@@ -114,25 +124,24 @@ public class Shooter : MonoBehaviour
                 if(!_stagger) {yield return new WaitForSeconds(_timeBetweenBursts);}
             }
         }
-
         yield return new WaitForSeconds(_restTime);
         _isShooting = false;
     }
 
     private void TargetConeOfInfluence(out float startAngle, out float currentAngle, out float angleStep, out float endAngle)
     {
-        Vector2 targetDirection = PlayerController.Instance.transform.position - transform.position;
+        Vector2 targetDirection = PlayerController.Instance.transform.position - transform.position + new Vector3(0,0.5f);
         float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
         startAngle = targetAngle;
         endAngle = targetAngle;
         currentAngle = targetAngle;
-        float halfAngleSpread = 0;
-        angleStep = 0;
+        float halfAngleSpread = 0f;
+        angleStep = 0f;
 
         if (_angleSpread != 0)
         {
-            angleStep = _angleSpread / _projectilesPerBurst - 1;
-            halfAngleSpread = _angleSpread / 2;
+            angleStep = _angleSpread / (_projectilesPerBurst - 1);
+            halfAngleSpread = _angleSpread / 2f;
             startAngle = targetAngle - halfAngleSpread;
             endAngle = targetAngle + halfAngleSpread;
             currentAngle = startAngle;
@@ -141,9 +150,9 @@ public class Shooter : MonoBehaviour
 
     private Vector2 FindBulletSpawnPos(float currentAngle)
     {
-        float x = transform.GetChild(0).position.x + _startingDistance * Mathf.Cos(currentAngle * Mathf.Deg2Rad);
-        float y = transform.GetChild(0).position.y + _startingDistance * Mathf.Sin(currentAngle * Mathf.Deg2Rad);
-        
+        float x = transform.position.x + _startingDistance * Mathf.Cos(currentAngle * Mathf.Deg2Rad);
+        float y = transform.position.y + _startingDistance * Mathf.Sin(currentAngle * Mathf.Deg2Rad);
+
         Vector2 pos = new Vector2(x, y);
         
         return pos;
@@ -174,5 +183,10 @@ public class Shooter : MonoBehaviour
             _sr.flipX = true; // Face left
             _shootPos.localPosition = new Vector2(-_originalXValue,_shootPos.localPosition.y);
         }
+    }
+
+    private void DelayedStart()
+    {
+        _isDelayed = false;
     }
 }
