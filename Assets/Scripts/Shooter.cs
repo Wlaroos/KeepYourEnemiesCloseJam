@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,7 +6,10 @@ public class Shooter : MonoBehaviour
 {
     [Header("Pool Ref")]
     [SerializeField] private BulletPool _bulletPool;
-    [Header("Bullet Info")]
+
+    [Header("Bullet Info")] 
+    [SerializeField] private Sprite[] _bulletArray;
+    [SerializeField] private int _bulletIndex;
     [SerializeField] private float _bulletMoveSpeed;
     [SerializeField] private float _startingDistance = 0.1f;
     [Header("Burst Info")]
@@ -19,18 +23,28 @@ public class Shooter : MonoBehaviour
     [SerializeField] private bool _stagger;
     [SerializeField] private bool _oscillate;
 
+    [Header("Animation Stuff")] [SerializeField] private bool _attackEachBurst;
+
     private bool _isShooting = false;
     private bool _isMarkActivated = false;
+
+    private Animator _anim;
 
     private void Update()
     {
         Attack();
     }
 
+    private void Awake()
+    {
+        _anim = GetComponent<Animator>();
+    }
+
     public void Attack()
     {
         if (!_isShooting && !_isMarkActivated)
         {
+            _anim.SetTrigger("Attack");
             StartCoroutine(ShootRoutine());
         }
     }
@@ -68,13 +82,15 @@ public class Shooter : MonoBehaviour
             
             if (!_isMarkActivated)
             {
+                
                 for (int j = 0; j < _projectilesPerBurst; j++)
                 {
                     Vector2 pos = FindBulletSpawnPos(currentAngle);
                     //GameObject bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
                     GameObject bullet = _bulletPool.GetBullet();
+                    bullet.GetComponent<SpriteRenderer>().sprite = _bulletArray[_bulletIndex];
                     bullet.transform.position = pos;
-                    bullet.transform.right = bullet.transform.position - transform.position;
+                    bullet.transform.right = PlayerController.Instance.transform.position - bullet.transform.position;
 
                     if (bullet.TryGetComponent(out Projectile projectile))
                     {
@@ -118,8 +134,8 @@ public class Shooter : MonoBehaviour
 
     private Vector2 FindBulletSpawnPos(float currentAngle)
     {
-        float x = transform.position.x + _startingDistance * Mathf.Cos(currentAngle * Mathf.Deg2Rad);
-        float y = transform.position.y + _startingDistance * Mathf.Sin(currentAngle * Mathf.Deg2Rad);
+        float x = transform.GetChild(0).position.x + _startingDistance * Mathf.Cos(currentAngle * Mathf.Deg2Rad);
+        float y = transform.GetChild(0).position.y + _startingDistance * Mathf.Sin(currentAngle * Mathf.Deg2Rad);
         
         Vector2 pos = new Vector2(x, y);
         
@@ -129,5 +145,10 @@ public class Shooter : MonoBehaviour
     public void MarkActivated()
     {
         _isMarkActivated = true;
+    }
+
+    public void BackToIdle()
+    {
+        _anim.SetTrigger("Idle");
     }
 }

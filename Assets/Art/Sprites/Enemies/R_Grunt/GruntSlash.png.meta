@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c5201af9d1093ce47bd3cb3eacfe5fe6
+guid: 4d28fa454794269448b450ae7626eb39
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,211 +110,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bullets_0
+      name: GruntSlash_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 21
-        width: 7
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bd744e0df48181346abdac0d28d2330e
-      internalID: -65364164
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bullets_1
-      rect:
-        serializedVersion: 2
-        x: 11
-        y: 22
-        width: 7
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 684f111901ebc054e9e22dffbe3f4c99
-      internalID: -1278164461
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bullets_2
-      rect:
-        serializedVersion: 2
-        x: 22
-        y: 22
-        width: 7
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f8dfd3803e8011f4d960a5448603b270
-      internalID: 1533922289
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bullets_3
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 22
-        width: 6
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 32200e9d1cd6f3d48a1ee6765debcbf9
-      internalID: 1338682875
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bullets_4
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 11
-        width: 5
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3d27a39ed4c1c0d42a1b8e042e32eff7
-      internalID: -1516901966
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bullets_5
-      rect:
-        serializedVersion: 2
-        x: 11
-        y: 11
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dce62ee2858cbe343a7317ed5d2e0cfd
-      internalID: 328303763
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bullets_6
-      rect:
-        serializedVersion: 2
-        x: 22
-        y: 10
-        width: 5
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e7d1a668cf19bb3438c7bb00265be39a
-      internalID: 1323760127
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bullets_7
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 10
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 30acf09b79f245b44a77f12b369ace89
-      internalID: 355088807
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bullets_8
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b4835f83910ca3c499e2df9e4958bfe7
-      internalID: -329289201
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bullets_9
-      rect:
-        serializedVersion: 2
-        x: 10
         y: 0
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 15
+        height: 12
+      alignment: 9
+      pivot: {x: 0.73333335, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d73648675db97b74183b8021cce0e2e7
-      internalID: 1002033205
+      spriteID: 921ad63933d398241b071de5011fdc50
+      internalID: 278994627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GruntSlash_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 12
+      alignment: 9
+      pivot: {x: 0.6875, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1cecf3b50f464d4c9e2850e194369db
+      internalID: 650881921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GruntSlash_2
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 0
+        width: 15
+        height: 12
+      alignment: 9
+      pivot: {x: 0.73333335, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0f406526d66baf4184338b6512e22c1
+      internalID: 1733258872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GruntSlash_3
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 0
+        width: 16
+        height: 11
+      alignment: 9
+      pivot: {x: 0.6875, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69c9ea517c36d9e4fb5219c7e148af42
+      internalID: 1560302700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GruntSlash_4
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 0
+        width: 23
+        height: 16
+      alignment: 9
+      pivot: {x: 0.47826087, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 218615025d9ff984da1679824f61bfe4
+      internalID: -1888137614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GruntSlash_5
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 0
+        width: 23
+        height: 17
+      alignment: 9
+      pivot: {x: 0.47826087, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 360bd5a85125afd4fb5b4556a9e9efd0
+      internalID: -1075875637
       vertices: []
       indices: 
       edges: []
@@ -328,20 +244,14 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures:
-    - texture: {fileID: 2800000, guid: 49291c8415d519445a61a5bb425435c7, type: 3}
-      name: _EmissionMap
+    secondaryTextures: []
     nameFileIdTable:
-      Bullets_0: -65364164
-      Bullets_1: -1278164461
-      Bullets_2: 1533922289
-      Bullets_3: 1338682875
-      Bullets_4: -1516901966
-      Bullets_5: 328303763
-      Bullets_6: 1323760127
-      Bullets_7: 355088807
-      Bullets_8: -329289201
-      Bullets_9: 1002033205
+      GruntSlash_0: 278994627
+      GruntSlash_1: 650881921
+      GruntSlash_2: 1733258872
+      GruntSlash_3: 1560302700
+      GruntSlash_4: -1888137614
+      GruntSlash_5: -1075875637
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
