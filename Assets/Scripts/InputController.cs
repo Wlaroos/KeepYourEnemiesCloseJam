@@ -8,11 +8,11 @@ public class InputController : MonoBehaviour
 {
     private void Update()
     {
-        if (Input.GetAxis("CycleLevel") == 1)
+        if (Input.GetAxis("CycleLevel") == 1 && SceneManager.GetSceneAt(SceneManager.GetActiveScene().buildIndex + 1).IsValid())
         {
-            SceneManager.LoadScene (SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
-        else if (Input.GetAxis("CycleLevel") == -1)
+        else if (Input.GetAxis("CycleLevel") == -1 && SceneManager.GetSceneAt(SceneManager.GetActiveScene().buildIndex - 1).IsValid())
         {
             SceneManager.LoadScene (SceneManager.GetActiveScene().buildIndex - 1);
         }
