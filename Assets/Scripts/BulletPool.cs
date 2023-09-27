@@ -1,12 +1,27 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletPool : MonoBehaviour
 {
+    public static BulletPool Instance { get; private set; }
+    
     [SerializeField] private GameObject _bulletPrefab; // The bullet prefab to be pooled.
     [SerializeField] private int _poolSize = 20; // The number of bullets to initially create and pool.
 
     private List<GameObject> _bulletPool; // The list to hold pooled bullets.
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); // Ensures only one instance exists
+        }
+    }
 
     private void Start()
     {

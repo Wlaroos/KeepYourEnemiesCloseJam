@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
-    [Header("Pool Ref")]
-    [SerializeField] private BulletPool _bulletPool;
+    [Header("Bullet Shape And Color")] 
+    [SerializeField] private Sprite _bulletSprite;
+    [SerializeField] private Material _bulletMat;
     [Header("Bullet Info")] 
-    [SerializeField] private Sprite[] _bulletArray;
-    [SerializeField] private int _bulletIndex;
     [SerializeField] private float _bulletMoveSpeed;
     [SerializeField] private float _startingDistance = 0.1f;
     [Header("Burst Info")]
@@ -21,7 +20,6 @@ public class Shooter : MonoBehaviour
     [Header("Stagger/Oscilate")] 
     [SerializeField] private bool _stagger;
     [SerializeField] private bool _oscillate;
-
     [Header("Animation Stuff")] 
     [SerializeField] private bool _attackEachBurst;
     [SerializeField] private float _attackStartDelay = 0.5f;
@@ -29,7 +27,7 @@ public class Shooter : MonoBehaviour
     private bool _isShooting = false;
     private bool _isMarkActivated = false;
     private bool _isDelayed = true;
-
+    
     private SpriteRenderer _sr;
     private Transform _shootPos;
     private float _originalXValue;
@@ -104,8 +102,9 @@ public class Shooter : MonoBehaviour
                 {
                     Vector2 pos = FindBulletSpawnPos(currentAngle);
                     //GameObject bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
-                    GameObject bullet = _bulletPool.GetBullet();
-                    bullet.GetComponent<SpriteRenderer>().sprite = _bulletArray[_bulletIndex];
+                    GameObject bullet = BulletPool.Instance.GetBullet();
+                    bullet.GetComponent<SpriteRenderer>().sprite = _bulletSprite;
+                    bullet.GetComponent<SpriteRenderer>().material = _bulletMat;
                     bullet.transform.position = pos;
                     bullet.transform.right = bullet.transform.position - _shootPos.position;
                     

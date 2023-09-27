@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private GameObject _particleDashed;
 
     private BulletPool _bulletPool;
+    private Material _mat;
     
     private void OnEnable()
     {
@@ -58,8 +59,16 @@ public class Projectile : MonoBehaviour
 
     private void RemoveProjectile()
     {
+        _mat = GetComponent<SpriteRenderer>().material;
+        
         //Maybe pool particles later
-        Instantiate(_particleOnHit, transform.position, transform.rotation);
+        GameObject particle = Instantiate(_particleOnHit, transform.position, transform.rotation);
+        
+        // Change Material and Color based on the projectile's material
+        particle.GetComponent<ParticleSystemRenderer>().material = _mat;
+        ParticleSystem.MainModule main = particle.GetComponent<ParticleSystem>().main;
+        main.startColor = new ParticleSystem.MinMaxGradient(_mat.color, _mat.color * 0.25f);
+        
         _bulletPool.ReturnBullet(gameObject);
         CancelInvoke();
     }
