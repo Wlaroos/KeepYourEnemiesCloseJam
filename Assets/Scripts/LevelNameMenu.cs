@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelFadeManager : MonoBehaviour
+public class LevelNameMenu : MonoBehaviour
 {
     [SerializeField] private Image _fadeImage;
     [SerializeField] private float _fadeDelay = 2f;

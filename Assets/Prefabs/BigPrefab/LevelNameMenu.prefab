@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7809495808224801789}
   - component: {fileID: 2206889076742734821}
   m_Layer: 0
-  m_Name: Level Manager
+  m_Name: LevelNameMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,8 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fadeImage: {fileID: 7809495808224801789}
-  _fadeDelay: 2
-  _fadeDuration: 1.5
+  _fadeDelay: 1
+  _fadeDuration: 1
 --- !u!222 &4961853622386893480
 CanvasRenderer:
   m_ObjectHideFlags: 0
