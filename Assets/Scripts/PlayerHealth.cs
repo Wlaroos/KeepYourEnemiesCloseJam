@@ -44,13 +44,13 @@ public class PlayerHealth : MonoBehaviour
         }
 
         // Changes y pos based on how many hearts there are.
-        float inc = Mathf.Ceil(_maxHealth / 3) * 0.25f;
+        float inc = Mathf.Ceil(_maxHealth / 3f) * 0.25f;
         
         if (_maxHealth is 1 or 2)
         {
             inc = 0.25f;
         }
-        Debug.Log(inc);
+        
         _healthHolder.transform.localPosition = new Vector2(0, 1.5f + inc);
     }
 
