@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
+    [Header("Movement")]
+    [SerializeField] private bool _canMove;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _maxDistanceFromPlayer;
     [Header("Bullet Shape And Color")] 
     [SerializeField] private Sprite _bulletSprite;
     [SerializeField] private Material _bulletMat;

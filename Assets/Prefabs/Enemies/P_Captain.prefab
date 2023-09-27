@@ -88,7 +88,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8688c1dff40a5b94a88219bb7872e481, type: 2}
+  - {fileID: 2100000, guid: 9994da24369a1a54fa411f029df3e1b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -177,14 +177,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98de8aa88fc11584b9c63fddf649fe27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canMove: 0
+  _moveSpeed: 0
+  _maxDistanceFromPlayer: 0
   _bulletSprite: {fileID: 328303763, guid: c5201af9d1093ce47bd3cb3eacfe5fe6, type: 3}
   _bulletMat: {fileID: 2100000, guid: 9994da24369a1a54fa411f029df3e1b8, type: 2}
   _bulletMoveSpeed: 5
   _startingDistance: 0.1
-  _burstCount: 4
-  _projectilesPerBurst: 4
+  _burstCount: 8
+  _projectilesPerBurst: 1
   _angleSpread: 0
-  _timeBetweenBursts: 0.25
+  _timeBetweenBursts: 0.2
   _restTime: 1.25
   _stagger: 1
   _oscillate: 0

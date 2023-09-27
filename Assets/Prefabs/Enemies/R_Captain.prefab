@@ -51,7 +51,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3048931507936322474
 Transform:
   m_ObjectHideFlags: 0
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8688c1dff40a5b94a88219bb7872e481, type: 2}
+  - {fileID: 2100000, guid: 36956fffeffbfb84f9c9821936321772, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -177,7 +177,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98de8aa88fc11584b9c63fddf649fe27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPool: {fileID: 0}
+  _canMove: 0
+  _moveSpeed: 0
+  _maxDistanceFromPlayer: 0
   _bulletSprite: {fileID: 1533922289, guid: c5201af9d1093ce47bd3cb3eacfe5fe6, type: 3}
   _bulletMat: {fileID: 2100000, guid: 36956fffeffbfb84f9c9821936321772, type: 2}
   _bulletMoveSpeed: 4
