@@ -48,9 +48,9 @@ public class PlayerHealth : MonoBehaviour
         
         if (_maxHealth is 1 or 2)
         {
-            inc += 0.25f;
+            inc = 0.25f;
         }
-        
+        Debug.Log(inc);
         _healthHolder.transform.localPosition = new Vector2(0, 1.5f + inc);
     }
 

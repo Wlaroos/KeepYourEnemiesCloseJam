@@ -594,6 +594,7 @@ MonoBehaviour:
   _stagger: 0
   _oscillate: 0
   _attackEachBurst: 0
+  _attackStartDelay: 0.5
 --- !u!61 &126102374
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -722,7 +723,7 @@ GameObject:
   - component: {fileID: 163815894}
   - component: {fileID: 163815893}
   m_Layer: 0
-  m_Name: R_Grunt (3)
+  m_Name: R_Captain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -798,6 +799,7 @@ MonoBehaviour:
   _stagger: 0
   _oscillate: 0
   _attackEachBurst: 0
+  _attackStartDelay: 0.5
 --- !u!61 &163815896
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8528,6 +8530,7 @@ MonoBehaviour:
   _stagger: 0
   _oscillate: 0
   _attackEachBurst: 0
+  _attackStartDelay: 0.5
 --- !u!61 &1821392158
 BoxCollider2D:
   m_ObjectHideFlags: 0

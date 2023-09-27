@@ -200,6 +200,7 @@ MonoBehaviour:
   _stagger: 0
   _oscillate: 0
   _attackEachBurst: 0
+  _attackStartDelay: 0.5
 --- !u!114 &5739426191927962146
 MonoBehaviour:
   m_ObjectHideFlags: 0

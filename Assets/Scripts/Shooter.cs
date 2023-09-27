@@ -107,7 +107,7 @@ public class Shooter : MonoBehaviour
                     GameObject bullet = _bulletPool.GetBullet();
                     bullet.GetComponent<SpriteRenderer>().sprite = _bulletArray[_bulletIndex];
                     bullet.transform.position = pos;
-                    bullet.transform.right = bullet.transform.position - transform.position;
+                    bullet.transform.right = bullet.transform.position - _shootPos.position;
                     
                     if (bullet.TryGetComponent(out Projectile projectile))
                     {
@@ -130,7 +130,7 @@ public class Shooter : MonoBehaviour
 
     private void TargetConeOfInfluence(out float startAngle, out float currentAngle, out float angleStep, out float endAngle)
     {
-        Vector2 targetDirection = PlayerController.Instance.transform.position - transform.position + new Vector3(0,0.5f);
+        Vector2 targetDirection = PlayerController.Instance.transform.position - _shootPos.position;
         float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
         startAngle = targetAngle;
         endAngle = targetAngle;
@@ -150,8 +150,8 @@ public class Shooter : MonoBehaviour
 
     private Vector2 FindBulletSpawnPos(float currentAngle)
     {
-        float x = transform.position.x + _startingDistance * Mathf.Cos(currentAngle * Mathf.Deg2Rad);
-        float y = transform.position.y + _startingDistance * Mathf.Sin(currentAngle * Mathf.Deg2Rad);
+        float x = _shootPos.position.x + _startingDistance * Mathf.Cos(currentAngle * Mathf.Deg2Rad);
+        float y = _shootPos.position.y + _startingDistance * Mathf.Sin(currentAngle * Mathf.Deg2Rad);
 
         Vector2 pos = new Vector2(x, y);
         
