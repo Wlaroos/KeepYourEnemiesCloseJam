@@ -168,7 +168,7 @@ public class TextWobble : MonoBehaviour
                 }
             }
         }
-
+        
         _mesh.vertices = _vertices;
         _mesh.colors = colors;
         _textMesh.canvasRenderer.SetMesh(_mesh);

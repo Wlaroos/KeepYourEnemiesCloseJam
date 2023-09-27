@@ -35,9 +35,13 @@ public class SnapshotManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Select") && _allowExit)
+        if (Input.GetButtonDown("Select") && _allowExit && SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings)
         {
             SceneManager.LoadScene (SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else if (Input.GetButtonDown("Select") && _allowExit && !(SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings))
+        {
+            SceneManager.LoadScene(0);
         }
     }
 

@@ -20,10 +20,15 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private Rigidbody2D _cloud2;
     
     [SerializeField] private TMP_Text _skipText;
+
+    private bool _hasSkipped = false;
     
     // Start is called before the first frame update
     void Start()
     {
+        // Fix level cycling error where time scale wasn't set back after swapping off a different level too fast.
+        Time.timeScale = 1;
+        
         if (Input.GetJoystickNames().Length > 0)
         {
             _skipText.text = "Press X To Skip";
@@ -36,10 +41,11 @@ public class CutsceneManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Select"))
+        if (Input.GetButtonDown("Select")&& _hasSkipped == false)
         {
             StopAllCoroutines();
             StartCoroutine(Skipped());
+            _hasSkipped = true;
         }
     }
 
