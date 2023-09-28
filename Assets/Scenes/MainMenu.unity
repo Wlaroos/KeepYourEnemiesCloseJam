@@ -5114,7 +5114,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -625.4188, y: 31.039162}
+  m_AnchoredPosition: {x: -625.4188, y: -82}
   m_SizeDelta: {x: 7.3505, y: 6.1982}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &364472741
@@ -9472,7 +9472,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 335.84, y: -594.22}
+  m_AnchoredPosition: {x: 335.83997, y: -729.28796}
   m_SizeDelta: {x: 471.7, y: 770.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &733245627
@@ -9501,12 +9501,7 @@ MonoBehaviour:
 
     Music:
 
-
-
-    SFX:
-
-    Sampled
-    from old samurai Movies and edited'
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8062fae4d1c40274b87becd81ba58ed2, type: 2}
   m_sharedMaterial: {fileID: 3794512070183876991, guid: 8062fae4d1c40274b87becd81ba58ed2, type: 2}
@@ -9541,7 +9536,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -20337,11 +20332,11 @@ RectTransform:
   - {fileID: 243061269}
   - {fileID: 1536682534}
   - {fileID: 733245626}
+  - {fileID: 364472740}
   - {fileID: 286895646}
   - {fileID: 1090429205}
   - {fileID: 877640631}
   - {fileID: 219463814}
-  - {fileID: 364472740}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -25863,7 +25858,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 96ad6cde0af5a7c469f1e22751541c91, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
