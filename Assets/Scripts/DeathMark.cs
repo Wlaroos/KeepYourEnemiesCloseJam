@@ -5,6 +5,7 @@ public class DeathMark : MonoBehaviour
 {
     [SerializeField] private GameObject _deathMarkPrefab;
     [SerializeField] private GameObject _killParticles;
+    [SerializeField] private GameObject _deathMarkParticles;
     private DeathMarkManager _dmm;
     private SpriteRenderer _sr;
     private SpriteRenderer _dmsr;
@@ -46,6 +47,7 @@ public class DeathMark : MonoBehaviour
             _dmm.MarkCreated(this);
             //Debug.Log("MARK CREATED");
             _dmsr.color = new Color32(25, 25, 25, 255);
+            Instantiate(_deathMarkParticles, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
             //_sr.color = Color.magenta;
         }
     }

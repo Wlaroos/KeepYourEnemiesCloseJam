@@ -207,6 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deathMarkPrefab: {fileID: 7616403426876948026, guid: 476561426aebbd14e8ef03234271baec, type: 3}
   _killParticles: {fileID: 4555839218954820872, guid: 2d16a7165e51bef4eb0f4b122c4885d5, type: 3}
+  _deathMarkParticles: {fileID: 3279653422854555228, guid: e443a3f6b2192be4cb397c857de3d0d5, type: 3}
 --- !u!95 &658760961115899354
 Animator:
   serializedVersion: 5
