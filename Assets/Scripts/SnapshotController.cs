@@ -37,7 +37,7 @@ public class SnapshotController : MonoBehaviour
     {
         // this also captures gui, remove if you don't wanna capture gui
         //yield return new WaitForEndOfFrame(); 
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForEndOfFrame();
                
         // If RenderTexture.active is set any rendering goes into this RenderTexture
         // instead of the GameView
