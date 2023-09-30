@@ -74,6 +74,7 @@ public class SnapshotManager : MonoBehaviour
     private IEnumerator Slice()
     {
         _bg.SetActive(true);
+        MusicManager.Instance.SwapTrack(true);
         
         int direction = Random.Range(0, 2) * 2 - 1;  // Randomly pick 1 or -1
         

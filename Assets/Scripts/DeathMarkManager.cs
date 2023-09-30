@@ -83,6 +83,8 @@ public class DeathMarkManager : MonoBehaviour
         {
             mark.GetComponent<Shooter>()?.MarkActivated();
         }
+        
+        MusicManager.Instance.SwapTrack(true);
     }
 
 }
