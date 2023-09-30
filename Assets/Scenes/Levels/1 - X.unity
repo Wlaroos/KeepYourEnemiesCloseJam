@@ -533,10 +533,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BigPrefab
       objectReference: {fileID: 0}
-    - target: {fileID: 9027633677225306214, guid: c4f1d13c4244d8d43bc189230835fa71, type: 3}
-      propertyPath: _renderTexture
-      value: 
-      objectReference: {fileID: 8400000, guid: c480145b4be04ea4cac804240e7c706c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
