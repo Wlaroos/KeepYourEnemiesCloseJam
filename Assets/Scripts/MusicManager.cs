@@ -64,6 +64,7 @@ public class MusicManager : MonoBehaviour
         if (_isFirst)
         {
             _track01.Play();
+            _track01.volume = _maxVolume;
             _track02.Pause();
             _isFirst = false;
             yield break;
