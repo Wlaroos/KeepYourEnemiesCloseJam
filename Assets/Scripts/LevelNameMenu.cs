@@ -51,6 +51,8 @@ public class LevelNameMenu : MonoBehaviour
         _fadeImage.color = endColor;
         Time.timeScale = 1f; // Set time scale back to 1 to start the level
         
+        MusicManager.Instance.SwapTrack(false);
+        
         Destroy(gameObject);
     }
 }
