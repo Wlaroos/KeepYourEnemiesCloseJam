@@ -14,7 +14,7 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private float _timeToFade = 2.5f;
     
     private AudioSource _track01, _track02;
-    private bool _isPlayingMenu;
+    private bool _isPlayingMenu = true;
 
     private bool _isFirst = true;
     
@@ -31,7 +31,6 @@ public class MusicManager : MonoBehaviour
         }
         
         DontDestroyOnLoad(transform.gameObject);
-        _track01 = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -39,15 +38,25 @@ public class MusicManager : MonoBehaviour
         _track01 = gameObject.AddComponent<AudioSource>();
         _track02 = gameObject.AddComponent<AudioSource>();
         
+        _track01.volume = _maxVolume;
+        _track02.volume = _maxVolume;
+        
         _track01.loop = true;
         _track02.loop = true;
-        
-        _isPlayingMenu = true;
 
         _track01.clip = _menuMusic;
         _track02.clip = _fightMusic;
         
-        SwapTrack(true);
+        _track01.Play();
+        _track02.Play();
+        
+        _track01.Pause();
+        _track02.Pause();
+
+        if (_isFirst)
+        {
+            SwapTrack(true);
+        }
     }
 
     public void SwapTrack(Boolean isMenu)
@@ -55,26 +64,22 @@ public class MusicManager : MonoBehaviour
         StopAllCoroutines();
         
         StartCoroutine(FadeTrack(isMenu));
-        
-        if(!_isFirst) _isPlayingMenu = !_isPlayingMenu;
     }
 
     private IEnumerator FadeTrack(Boolean isMenu)
     {
         if (_isFirst)
         {
-            _track01.Play();
-            _track01.volume = _maxVolume;
+            _track01.UnPause();
             _track02.Pause();
             _isFirst = false;
-            yield break;
         }
         
         float timeElapsed = 0;
         
-        if (_isPlayingMenu == true)
+        if (isMenu && !_isPlayingMenu)
         {
-            _track01.Play();
+            _track01.UnPause();
             
             while(timeElapsed < _timeToFade)
             {
@@ -85,10 +90,11 @@ public class MusicManager : MonoBehaviour
             }
             
             _track02.Pause();
+            _isPlayingMenu = true;
         }
-        else
+        else if(!isMenu && _isPlayingMenu)
         {
-            _track02.Play();
+            _track02.UnPause();
             while(timeElapsed < _timeToFade)
             {
                 _track01.volume = Mathf.Lerp(_maxVolume, 0, timeElapsed / _timeToFade);
@@ -97,6 +103,11 @@ public class MusicManager : MonoBehaviour
                 yield return null;
             }
             _track01.Pause();
+            _isPlayingMenu = false;
+        }
+        else
+        {
+            //noth
         }
     }
 }

@@ -182,6 +182,7 @@ public class TextWobble : MonoBehaviour
     // Function to scale the text (zoom in or out) over a specified duration
     public void ScaleText(Vector2 targetFontSize, float duration)
     {
+        StopAllCoroutines();
         StartCoroutine(AnimateTextScaling(targetFontSize, duration));
     }
     
