@@ -206,18 +206,18 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1;
         
         // Zoom Camera Out
-        CameraController.Instance.StartZoomIn(8, .5f);
+        CameraController.Instance.StartZoomIn(8, .33f);
         yield return new WaitForSeconds(.25f);
         
         // Start Shockwave
         ShockwaveManager.Instance.CallShockwave(PlayerController.Instance.transform.position);
-        yield return new WaitForSeconds(1.25f);
+        yield return new WaitForSeconds(0.75f);
 
         _sr.sortingOrder = 2;
         transform.GetChild(3).GetComponent<TrailRenderer>().emitting = true;
 
         // Set the initial delay and minimum clamp
-        float initialDelay = .5f;
+        float initialDelay = .25f;
         float minDelay = 0.05f;
         
         // Teleport to each enemy with a mark.
@@ -246,14 +246,11 @@ public class PlayerController : MonoBehaviour
         
         yield return new WaitForSeconds(.05f);
         transform.GetChild(3).GetComponent<TrailRenderer>().emitting = false;
-
-        initialDelay = .5f;
         
+        yield return new WaitForSeconds(.5f);
         foreach (DeathMark mark in DeathMarkManager.Instance._createdList)
         {
             mark.Death();
-            initialDelay = Mathf.Clamp(initialDelay * 0.9f, minDelay, initialDelay);
-            yield return new WaitForSeconds(initialDelay);
         }
 
         yield return new WaitForSeconds(1f);
@@ -283,16 +280,6 @@ public class PlayerController : MonoBehaviour
     private void UnsheathEnd()
     {
         _anim.SetTrigger("Aura");
-
-        // If Controller Change Text
-        if (Input.GetJoystickNames().Length > 0)
-        {
-            transform.GetChild(0).GetComponent<TMP_Text>().text = "Press X";
-        }
-        // Change pos based on whether the player is above or below the center of the scene
-        transform.GetChild(0).localPosition = transform.position.y >= 0 ? new Vector2(0, -1) : new Vector2(0, 2.5f);
-        // Text Scales In
-        transform.GetChild(0).GetComponent<TextWobble>().ScaleText(new Vector2(0.75f, 0.75f), 1.5f);
         
         if (!_isCharged)
         {
@@ -328,5 +315,15 @@ public class PlayerController : MonoBehaviour
         _sr.color = Color.white;
         PlayerHealth.Instance.SetInvincible();
         _anim.SetTrigger("Unsheath");
+        
+        // If Controller Change Text
+        if (Input.GetJoystickNames().Length > 0)
+        {
+            transform.GetChild(0).GetComponent<TMP_Text>().text = "Press X";
+        }
+        // Change pos based on whether the player is above or below the center of the scene
+        transform.GetChild(0).localPosition = transform.position.y >= 0 ? new Vector2(0, -1) : new Vector2(0, 2.5f);
+        // Text Scales In
+        transform.GetChild(0).GetComponent<TextWobble>().ScaleText(new Vector2(0.75f, 0.75f), 1.5f);
     }
 }

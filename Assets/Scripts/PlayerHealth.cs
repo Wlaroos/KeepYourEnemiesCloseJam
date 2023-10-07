@@ -163,6 +163,11 @@ public class PlayerHealth : MonoBehaviour
         _isInvincible = true;
         StopAllCoroutines();
     }
+
+    public void HideHearts()
+    {
+        _healthHolder.SetActive(false);
+    }
     
     private void Death()
     {

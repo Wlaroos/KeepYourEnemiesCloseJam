@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class LevelNameMenu : MonoBehaviour
 {
     [SerializeField] private Image _fadeImage;
-    [SerializeField] private float _fadeDelay = 2f;
-    [SerializeField] private float _fadeDuration = 1.5f;
+    [SerializeField] private float _fadeDelay = 1f;
+    [SerializeField] private float _fadeDuration = 0.75f;
 
     private TMP_Text _levelName;
 

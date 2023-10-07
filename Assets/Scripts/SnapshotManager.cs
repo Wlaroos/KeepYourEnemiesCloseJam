@@ -73,13 +73,15 @@ public class SnapshotManager : MonoBehaviour
 
     private IEnumerator Slice()
     {
+        _allowExit = true;
+        
         _bg.SetActive(true);
         MusicManager.Instance.SwapTrack(true);
         
         int direction = Random.Range(0, 2) * 2 - 1;  // Randomly pick 1 or -1
         
         //ANIMATION OF SCREEN SLICE
-        float increment = 50 * Time.fixedDeltaTime;
+        float increment = 75 * Time.fixedDeltaTime;
 
         if (direction == -1)
         {
@@ -111,21 +113,21 @@ public class SnapshotManager : MonoBehaviour
         
         _quadTop.GetComponent<Rigidbody>().AddForce(0, 0.01f, 0, ForceMode.Impulse);
         _quadBottom.GetComponent<Rigidbody>().AddForce(0, -0.01f, 0, ForceMode.Impulse);
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.05f);
         _quadTop.transform.GetChild(0).gameObject.SetActive(true);
         _quadBottom.transform.GetChild(0).gameObject.SetActive(true);
         
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
     
         _quadTop.GetComponent<Rigidbody>().AddForce(direction * 3, 0, 0, ForceMode.Impulse);
         _quadBottom.GetComponent<Rigidbody>().AddForce(direction * -3, 0, 0, ForceMode.Impulse);
     
-        yield return new WaitForSeconds(.25f);
+        yield return new WaitForSeconds(.125f);
     
         _quadTop.GetComponent<Rigidbody>().AddForce(direction * -2, 0, 0, ForceMode.Impulse);
         _quadBottom.GetComponent<Rigidbody>().AddForce(direction * 2, 0, 0, ForceMode.Impulse);
     
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
     
         _quadTop.GetComponent<Rigidbody>().AddForce(0, Random.Range(5, 8), 0, ForceMode.Impulse);
         _quadBottom.GetComponent<Rigidbody>().AddForce(0, Random.Range(-8, -5), 0, ForceMode.Impulse);
@@ -141,8 +143,6 @@ public class SnapshotManager : MonoBehaviour
         }
         
         yield return new WaitForSeconds(1f);
-
-        _allowExit = true;
         
         float elapsedTime = 0f;
 

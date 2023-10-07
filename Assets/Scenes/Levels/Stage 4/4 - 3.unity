@@ -359,14 +359,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 950582564153719503, guid: c4f1d13c4244d8d43bc189230835fa71, type: 3}
-      propertyPath: _fadeDelay
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 950582564153719503, guid: c4f1d13c4244d8d43bc189230835fa71, type: 3}
-      propertyPath: _fadeDuration
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6151008445213219137, guid: c4f1d13c4244d8d43bc189230835fa71, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
