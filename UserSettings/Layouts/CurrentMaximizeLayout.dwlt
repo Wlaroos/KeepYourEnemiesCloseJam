@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 17419
+  controlID: 19944
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 17382
+  controlID: 19907
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 17309
+  controlID: 19850
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -240,7 +240,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 7682feff30010100320101004a01010050010100
+      m_ExpandedIDs: 46aafdff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -655,7 +655,7 @@ MonoBehaviour:
       containerId: overlay-container--right
       floating: 0
       collapsed: 0
-      displayed: 1
+      displayed: 0
       snapOffset: {x: 48, y: 48}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
@@ -675,9 +675,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -3.8845897, y: -2.91308, z: -0.06224917}
+    m_Target: {x: -0.6450933, y: 0.5216042, z: -0.013364978}
     speed: 2
-    m_Value: {x: -3.8845897, y: -2.91308, z: -0.06224917}
+    m_Value: {x: -0.6450933, y: 0.5216042, z: -0.013364978}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -727,9 +727,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 7.1314015
+    m_Target: 1.5314881
     speed: 2
-    m_Value: 7.1314015
+    m_Value: 1.5314881
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1717,7 +1717,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 17383
+  controlID: 19908
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1789,7 +1789,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/BigPrefab
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1797,15 +1797,15 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/BigPrefab
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Unity\Projects\KeepYourEnemiesCloseJam
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 31}
-    m_SelectedIDs: e07b0000
-    m_LastClickedID: 31712
+    scrollPos: {x: 0, y: 91}
+    m_SelectedIDs: f27b0000
+    m_LastClickedID: 31730
     m_ExpandedIDs: 00000000ba7b0000bc7b0000be7b0000c07b0000c27b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1859,9 +1859,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 2a010100
-    m_LastClickedInstanceID: 65834
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 10220100
+    m_LastClickedInstanceID: 74256
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000ee6d0000a012fcff76fd000000000000f091000090700000ec760000469f0200
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -2017,8 +2017,8 @@ MonoBehaviour:
     m_CachedPref: 151
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 65834
-  m_LastVerticalScrollValue: 0
+  m_LastInspectedObjectInstanceID: 74256
+  m_LastVerticalScrollValue: 94
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:

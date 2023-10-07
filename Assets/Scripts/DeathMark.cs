@@ -9,6 +9,7 @@ public class DeathMark : MonoBehaviour
     private DeathMarkManager _dmm;
     private SpriteRenderer _sr;
     private SpriteRenderer _dmsr;
+    private Color _initialColor;
 
     private bool _isCreated = false;
     private bool _isActivated = false;
@@ -26,6 +27,7 @@ public class DeathMark : MonoBehaviour
         GameObject dmHolder = Instantiate(_deathMarkPrefab, new Vector2(transform.position.x, transform.position.y + 2f), Quaternion.identity, transform);
         _dmsr = dmHolder.GetComponent<SpriteRenderer>();
 
+        _initialColor = _dmsr.color;
         _dmsr.color = Color.clear;
     }
 
@@ -46,7 +48,7 @@ public class DeathMark : MonoBehaviour
             _isCreated = true;
             _dmm.MarkCreated(this);
             //Debug.Log("MARK CREATED");
-            _dmsr.color = new Color32(25, 25, 25, 255);
+            _dmsr.color = _initialColor;
             Instantiate(_deathMarkParticles, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
             //_sr.color = Color.magenta;
         }
