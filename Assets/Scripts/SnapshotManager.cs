@@ -54,7 +54,7 @@ public class SnapshotManager : MonoBehaviour
         GetComponent<SnapshotController>().Snapshot(HandleNewSnapshotTexture);
     }
     
-    private void HandleNewSnapshotTexture (Texture2D texture)
+    private void HandleNewSnapshotTexture (Texture2D textureTop, Texture2D textureBottom)
     {
         var material = _quadTop.GetComponent<Renderer>().material;
         var material2 = _quadBottom.GetComponent<Renderer>().material;
@@ -64,8 +64,8 @@ public class SnapshotManager : MonoBehaviour
         // a texture as soon as you don't need it anymore
         //if(material.mainTexture) DestroyImmediate(material.mainTexture);     
 
-        material.SetTexture("_MainTex", texture);
-        material2.SetTexture("_MainTex", texture);
+        material.SetTexture("_MainTex", textureTop);
+        material2.SetTexture("_MainTex", textureBottom);
         //material2.mainTexture = texture;
 
         StartCoroutine(Slice());

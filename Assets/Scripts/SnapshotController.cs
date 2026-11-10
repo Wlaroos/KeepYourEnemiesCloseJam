@@ -17,9 +17,11 @@ public class SnapshotController : MonoBehaviour
     
         if(!_renderTexture)
         {
-            _renderTexture = new RenderTexture(Screen.width, Screen.height , 24 , RenderTextureFormat.ARGB32);
-            _renderTexture.useMipMap = false;
-            _renderTexture.antiAliasing =1;
+            _renderTexture = new RenderTexture(Screen.width, Screen.height, 24, RenderTextureFormat.ARGB32)
+            {
+                useMipMap = false,
+                antiAliasing = 1
+            };
         }
         else
         {
@@ -28,12 +30,12 @@ public class SnapshotController : MonoBehaviour
         }
     }
     
-    public void Snapshot(Action<Texture2D> onSnapshotDone)
+    public void Snapshot(Action<Texture2D, Texture2D> onSnapshotDone)
     {
         StartCoroutine(SnapshotRoutine(onSnapshotDone));
     }
     
-    private IEnumerator SnapshotRoutine (Action<Texture2D> onSnapshotDone)
+    private IEnumerator SnapshotRoutine (Action<Texture2D, Texture2D> onSnapshotDone)
     {
         // this also captures gui, remove if you don't wanna capture gui
         //yield return new WaitForEndOfFrame(); 
@@ -48,16 +50,19 @@ public class SnapshotController : MonoBehaviour
         _camera.Render();
      
         // Create a new Texture2D        
-        var result = new Texture2D(Screen.width,Screen.height,TextureFormat.ARGB32,false);
+        var resultTop = new Texture2D(Screen.width,Screen.height,TextureFormat.ARGB32,false);
+        var resultBottom = new Texture2D(Screen.width,Screen.height,TextureFormat.ARGB32,false);
         // copies the pixels into the Texture2D          
-        result.ReadPixels(new Rect(0,0,Screen.width,Screen.height),0,0,false);
-        result.Apply();
+        resultTop.ReadPixels(new Rect(0,0,Screen.width,Screen.height),0,0,false);
+        resultTop.Apply();
+        resultBottom.ReadPixels(new Rect(0,0,Screen.width,Screen.height),0,0,false);
+        resultBottom.Apply();
        
         // reset the RenderTexture.active so nothing else is rendered into our RenderTexture      
         RenderTexture.active = null;
         _camera.targetTexture = null;
     
         // Invoke the callback with the resulting snapshot Texture
-        onSnapshotDone?.Invoke(result);
+        onSnapshotDone?.Invoke(resultTop, resultBottom);
     }
 }

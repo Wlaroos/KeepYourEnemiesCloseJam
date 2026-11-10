@@ -6,17 +6,17 @@ public class FadeAndScale : MonoBehaviour
     public float fadeDuration = 2f;
     public float scaleDuration = 2f;
 
-    private Renderer renderer;
-    private Transform transform;
+    private Renderer r;
+    private Transform trans;
     private Color startColor;
     private Vector3 startScale;
 
     private void Start()
     {
-        renderer = GetComponent<Renderer>();
-        transform = GetComponent<Transform>();
-        startColor = renderer.material.color;
-        startScale = transform.localScale;
+        r = GetComponent<Renderer>();
+        trans = GetComponent<Transform>();
+        startColor = r.material.color;
+        startScale = trans.localScale;
         
         StartFadeAndScale();
     }
@@ -34,18 +34,18 @@ public class FadeAndScale : MonoBehaviour
         {
             float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
             Color newColor = new Color(startColor.r, startColor.g, startColor.b, alpha);
-            renderer.material.color = newColor;
+            r.material.color = newColor;
             
             float scaleValue = Mathf.Lerp(1f, .5f, elapsedTime / scaleDuration);
-            transform.localScale = startScale * scaleValue;
+            trans.localScale = startScale * scaleValue;
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        renderer.material.color = new Color(startColor.r, startColor.g, startColor.b, 0f);
+        r.material.color = new Color(startColor.r, startColor.g, startColor.b, 0f);
         
-        transform.localScale = Vector3.zero;
+        trans.localScale = Vector3.zero;
         
         Destroy(gameObject);
     }

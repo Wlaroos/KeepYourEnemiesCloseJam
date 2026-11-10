@@ -20,7 +20,7 @@ public class DeathMarkManager : MonoBehaviour
         }
         
         // Find all DeathMark objects in the scene and add them to _markList
-        DeathMark[] deathMarks = FindObjectsOfType<DeathMark>();
+        DeathMark[] deathMarks = FindObjectsByType<DeathMark>(FindObjectsSortMode.None);
 
         foreach (DeathMark dm in deathMarks)
         {

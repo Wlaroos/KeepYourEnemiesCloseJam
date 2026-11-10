@@ -51,17 +51,17 @@ public class CutsceneManager : MonoBehaviour
 
     private IEnumerator Cutscene()
     {
-        _cloud1.velocity = new Vector2(.25f, 0);
-        _cloud2.velocity = new Vector2(-0.125f, 0);
+        _cloud1.linearVelocity = new Vector2(.25f, 0);
+        _cloud2.linearVelocity = new Vector2(-0.125f, 0);
         
         yield return new WaitForSeconds(2f);
 
-        var enemies = GameObject.FindObjectsOfType<Rigidbody2D>();
+        var enemies = FindObjectsByType<Rigidbody2D>(FindObjectsSortMode.None);
         foreach (var rb in enemies)
         {
             if (!rb.gameObject.CompareTag("Player"))
             {
-                rb.velocity = new Vector2(-7.5f, 0);
+                rb.linearVelocity = new Vector2(-7.5f, 0);
                 rb.GetComponent<Animator>().Play(0, 0, Random.value);
             }
         }
@@ -75,13 +75,13 @@ public class CutsceneManager : MonoBehaviour
         Destroy(_sword);
         
         yield return new WaitForSeconds(2.5f);
-        _enemy.GetComponent<Rigidbody2D>().velocity = new Vector2(7.5f, 0);
+        _enemy.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(7.5f, 0);
         
         yield return new WaitForSeconds(1f);
         Instantiate(_exclamationPoint, new Vector2(_player.transform.position.x + 1f, _player.transform.position.y + 1f), Quaternion.identity);
         
         yield return new WaitForSeconds(0.5f);
-        _enemy.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0);
+        _enemy.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0f, 0);
         _enemy.transform.GetChild(0).GetComponent<ParticleSystem>().Pause();
         _enemy.transform.GetChild(0).GetComponent<ParticleSystem>().Clear();
         _enemy.GetComponent<Animator>().SetTrigger("Stop");
@@ -92,12 +92,12 @@ public class CutsceneManager : MonoBehaviour
         Instantiate(_skull, new Vector2(_enemy.transform.position.x - 1f, _enemy.transform.position.y + 1f), Quaternion.identity);
         
         yield return new WaitForSeconds(1f);
-        _player.GetComponent<Rigidbody2D>().velocity = new Vector2(7.5f, 0);
+        _player.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(7.5f, 0);
         _player.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         _player.GetComponent<Animator>().SetTrigger("Run");
         
         yield return new WaitForSeconds(1f);
-        _enemy.GetComponent<Rigidbody2D>().velocity = new Vector2(7.5f, 0);
+        _enemy.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(7.5f, 0);
         _enemy.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         _enemy.GetComponent<Animator>().SetTrigger("Run");
         
