@@ -70,7 +70,7 @@ public class TextWobble : MonoBehaviour
                         
                         if(j == tempChars.Length - 1)       //if every character was correct, We found our selection!!
                         {
-                            print("Found the word!");
+                            //print("Found the word!");
                             _wordIndexes.Add(i);
                             _wordLengths.Add(tempChars.Length);
                             _tempString = _textToChangeColor;                            

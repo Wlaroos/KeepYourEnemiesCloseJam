@@ -28,14 +28,15 @@ public class SnapshotController : MonoBehaviour
             _renderTexture.width = Screen.width;
             _renderTexture.height = Screen.height;
         }
+        _renderTexture.Create();
     }
     
-    public void Snapshot(Action<Texture2D, Texture2D> onSnapshotDone)
+    public void Snapshot(Action<Texture2D> onSnapshotDone)
     {
         StartCoroutine(SnapshotRoutine(onSnapshotDone));
     }
     
-    private IEnumerator SnapshotRoutine (Action<Texture2D, Texture2D> onSnapshotDone)
+    private IEnumerator SnapshotRoutine (Action<Texture2D> onSnapshotDone)
     {
         // this also captures gui, remove if you don't wanna capture gui
         //yield return new WaitForEndOfFrame(); 
@@ -50,19 +51,16 @@ public class SnapshotController : MonoBehaviour
         _camera.Render();
      
         // Create a new Texture2D        
-        var resultTop = new Texture2D(Screen.width,Screen.height,TextureFormat.ARGB32,false);
-        var resultBottom = new Texture2D(Screen.width,Screen.height,TextureFormat.ARGB32,false);
+        var result = new Texture2D(Screen.width,Screen.height,TextureFormat.ARGB32,false);
         // copies the pixels into the Texture2D          
-        resultTop.ReadPixels(new Rect(0,0,Screen.width,Screen.height),0,0,false);
-        resultTop.Apply();
-        resultBottom.ReadPixels(new Rect(0,0,Screen.width,Screen.height),0,0,false);
-        resultBottom.Apply();
+        result.ReadPixels(new Rect(0,0,Screen.width,Screen.height),0,0,false);
+        result.Apply();
        
         // reset the RenderTexture.active so nothing else is rendered into our RenderTexture      
         RenderTexture.active = null;
         _camera.targetTexture = null;
     
         // Invoke the callback with the resulting snapshot Texture
-        onSnapshotDone?.Invoke(resultTop, resultBottom);
+        onSnapshotDone?.Invoke(result);
     }
 }

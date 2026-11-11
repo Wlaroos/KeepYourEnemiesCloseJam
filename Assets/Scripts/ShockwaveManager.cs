@@ -43,7 +43,7 @@ public class ShockwaveManager : MonoBehaviour
     {
         _material.SetFloat(_waveDistanceFromCenter, startPos);
 
-        float lerpedAmount = 0f;
+        float lerpedAmount;
         float elapsedTime = 0f;
         while (elapsedTime < _shockwaveTime)
         {

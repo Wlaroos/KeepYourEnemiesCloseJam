@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class FadeAndScale : MonoBehaviour
 {
-    public float fadeDuration = 2f;
-    public float scaleDuration = 2f;
+    public float fadeScaleDelay = 0f;
+    public float fadeScaleDuration = 2f;
 
     private Renderer r;
     private Transform trans;
@@ -28,15 +28,17 @@ public class FadeAndScale : MonoBehaviour
 
     private IEnumerator FadeScale()
     {
+        yield return new WaitForSeconds(fadeScaleDelay);
+
         float elapsedTime = 0f;
 
-        while (elapsedTime < fadeDuration)
+        while (elapsedTime < fadeScaleDuration)
         {
-            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
+            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeScaleDuration);
             Color newColor = new Color(startColor.r, startColor.g, startColor.b, alpha);
             r.material.color = newColor;
             
-            float scaleValue = Mathf.Lerp(1f, .5f, elapsedTime / scaleDuration);
+            float scaleValue = Mathf.Lerp(1f, .5f, elapsedTime / fadeScaleDuration);
             trans.localScale = startScale * scaleValue;
 
             elapsedTime += Time.deltaTime;
