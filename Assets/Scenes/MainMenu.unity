@@ -14067,6 +14067,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072400731}
   m_CullTransparentMesh: 1
+--- !u!1 &1073483750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1073483752}
+  - component: {fileID: 1073483751}
+  m_Layer: 0
+  m_Name: SFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1073483751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073483750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627bc8f1ff615b542a1b437fa38e9d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SFXManager
+  _applyMarkSFX: {fileID: 8300000, guid: 6fb44628f6a12514c956db4f60fc66dd, type: 3}
+  _dashSFX: {fileID: 8300000, guid: 02ffa595df53eff43893755178afc4bb, type: 3}
+  _destroyBulletSFX: {fileID: 8300000, guid: 59c5463b1b1980d469a83bc794867810, type: 3}
+  _enemyDeathSFX: {fileID: 8300000, guid: 17f2f7a3520f0894ba1483804d864e6d, type: 3}
+  _playerDeathSFX: {fileID: 8300000, guid: 1201ba321329fe54cac7f0b1d2ad224d, type: 3}
+  _slashSFX: {fileID: 8300000, guid: 4dc0313e737c30d4584fa37bfd96a24f, type: 3}
+  _initialPoolSize: 10
+  _maxPoolSize: 25
+--- !u!4 &1073483752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073483750}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.12835, y: 2.4722, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1080935368
 GameObject:
   m_ObjectHideFlags: 0
@@ -28013,3 +28065,4 @@ SceneRoots:
   - {fileID: 627076457}
   - {fileID: 481602411}
   - {fileID: 5682065535834542129}
+  - {fileID: 1073483752}

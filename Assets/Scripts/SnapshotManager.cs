@@ -83,6 +83,8 @@ public class SnapshotManager : MonoBehaviour
         //ANIMATION OF SCREEN SLICE
         float increment = 75 * Time.fixedDeltaTime;
 
+        SFXManager.Instance.PlayBigSlash();
+
         if (direction == -1)
         {
             _tr.transform.localPosition = new Vector2(50, 0);

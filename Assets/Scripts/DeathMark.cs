@@ -48,6 +48,7 @@ public class DeathMark : MonoBehaviour
             _isCreated = true;
             _dmm.MarkCreated(this);
             //Debug.Log("MARK CREATED");
+            SFXManager.Instance.PlayApplyMark();
             _dmsr.color = _initialColor;
             Instantiate(_deathMarkParticles, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
             //_sr.color = Color.magenta;
@@ -99,6 +100,7 @@ public class DeathMark : MonoBehaviour
     
     public void Death()
     {
+        SFXManager.Instance.PlayEnemyDeath();
         Instantiate(_killParticles, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.Euler(0, 0, Random.Range(0, 360)), transform);
     }
 

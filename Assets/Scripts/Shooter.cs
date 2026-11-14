@@ -123,6 +123,8 @@ public class Shooter : MonoBehaviour
                     }
 
                     currentAngle += angleStep;
+
+                    SFXManager.Instance.PlayEnemyShoot();
                     
                     if (_stagger) { yield return new WaitForSeconds(timeBetweenProjectiles); }
                 }

@@ -171,6 +171,7 @@ public class PlayerHealth : MonoBehaviour
     
     private void Death()
     {
+        SFXManager.Instance.PlayPlayerDeath();
         ShockwaveManager.Instance.CallShockwave(PlayerController.Instance.transform.position);
         PlayerController.Instance.CanMove = false;
         PlayerController.Instance.HideDashBar();

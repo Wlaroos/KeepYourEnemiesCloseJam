@@ -59,6 +59,8 @@ public class Projectile : MonoBehaviour
 
     private void RemoveProjectile()
     {
+        SFXManager.Instance.PlayDestroyBullet();
+
         _mat = GetComponent<SpriteRenderer>().material;
         
         //Maybe pool particles later
@@ -75,6 +77,8 @@ public class Projectile : MonoBehaviour
     
     private void RemoveProjectileDash()
     {
+        SFXManager.Instance.PlayDestroyBulletDash();
+
         //Maybe pool particles later
         Instantiate(_particleDashed, transform.position, transform.rotation);
         _bulletPool.ReturnBullet(gameObject);

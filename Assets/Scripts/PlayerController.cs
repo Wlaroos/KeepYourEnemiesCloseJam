@@ -148,6 +148,8 @@ public class PlayerController : MonoBehaviour
         _anim.SetBool("isDashing", true);
         _anim.SetTrigger("Dash");
 
+        SFXManager.Instance.PlayDash();
+
         float elapsedTime = 0f;
         float dashSpeed = (_dashDistance / _dashDuration);
 
@@ -234,6 +236,8 @@ public class PlayerController : MonoBehaviour
             _anim.SetTrigger("Slice");
             
             // Do anims and other shit
+            SFXManager.Instance.PlaySlash();
+
             // Destroy Marks?
             initialDelay = Mathf.Clamp(initialDelay * 0.9f, minDelay, initialDelay);
             
@@ -299,6 +303,7 @@ public class PlayerController : MonoBehaviour
     {
         _sr.color = Color.clear;
         Instantiate(_deathParticles, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
+        SFXManager.Instance.PlayPlayerExplode();
         LoseMenu.Instance.StartFade();
     }
     public void HideDashBar()
