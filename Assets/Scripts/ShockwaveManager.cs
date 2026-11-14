@@ -36,6 +36,9 @@ public class ShockwaveManager : MonoBehaviour
         transform.position = pos;
         _sr.color = Color.white;
         _cc.enabled = true;
+
+        SFXManager.Instance.PlayShockwave();
+        
         StartCoroutine(ShockwaveAction(-0.1f, 1f));
     }
 

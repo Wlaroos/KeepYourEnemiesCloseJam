@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
     
     private void OnEnable()
     {
+        // No SFX for this
         Invoke(nameof(RemoveProjectile), _projectileLifeTime);
     }
 
@@ -33,6 +34,7 @@ public class Projectile : MonoBehaviour
         if(!other.isTrigger && player && !player.IsDashing)
         {
             playerHP.DecreaseHealth(1);
+            SFXManager.Instance.PlayDestroyBullet();
             RemoveProjectile();
         }
         else if(!other.isTrigger && player && player.IsDashing)
@@ -43,6 +45,7 @@ public class Projectile : MonoBehaviour
         // Wall and Shockwave collisions
         if (other.gameObject.layer is 7 or 8)
         {
+            SFXManager.Instance.PlayDestroyBullet();
             RemoveProjectile();
         }
     }
@@ -59,8 +62,6 @@ public class Projectile : MonoBehaviour
 
     private void RemoveProjectile()
     {
-        SFXManager.Instance.PlayDestroyBullet();
-
         _mat = GetComponent<SpriteRenderer>().material;
         
         //Maybe pool particles later

@@ -247,6 +247,8 @@ public class PlayerController : MonoBehaviour
         // Flip To the right, teleport to center of scene
         Flip(1);
         _rb.MovePosition(new Vector2(0, -0.5f));
+
+        SFXManager.Instance.PlaySheath();
         
         yield return new WaitForSeconds(.05f);
         transform.GetChild(3).GetComponent<TrailRenderer>().emitting = false;

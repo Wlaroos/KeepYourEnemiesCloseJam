@@ -15,6 +15,10 @@ public class SFXManager : MonoBehaviour
     [SerializeField] private AudioClip _playerExplodeSFX;
     [SerializeField] private AudioClip _slashSFX;
     [SerializeField] private AudioClip _bigSlashSFX;
+    [SerializeField] private AudioClip _sheathSFX;
+    [SerializeField] private AudioClip _shockwaveSFX;
+    [SerializeField] private AudioClip _snapshotSFX;
+    [SerializeField] private AudioClip _snapshot2SFX;
 
     [SerializeField] private int _initialPoolSize = 10;
     [SerializeField] private int _maxPoolSize = 25;
@@ -106,6 +110,10 @@ public class SFXManager : MonoBehaviour
     public void PlayDash() => PlaySFX(_dashSFX, 1f, 0.2f);
     public void PlayDestroyBullet() => PlaySFX(_destroyBulletSFX, 0.5f, 0.2f);
     public void PlayDestroyBulletDash() => PlaySFX(_destroyBulletDashSFX, 0.75f, 0.2f);
+    public void PlaySheath() => PlaySFX(_sheathSFX, 1f, 0.2f);
+    public void PlayShockwave() => PlaySFX(_shockwaveSFX, 1f, 0.2f);
+    public void PlaySnapshot() => PlaySFX(_snapshotSFX, 1f, 0.2f);
+    public void PlaySnapshot2() => PlaySFX(_snapshot2SFX, 1f, 0.2f);
     private void PlaySFX(AudioClip clip, float volume = 1f, float pitchVariance = 0.1f)
     {
         if (clip == null) return;

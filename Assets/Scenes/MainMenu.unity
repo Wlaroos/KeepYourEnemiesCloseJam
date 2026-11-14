@@ -14099,9 +14099,17 @@ MonoBehaviour:
   _applyMarkSFX: {fileID: 8300000, guid: 6fb44628f6a12514c956db4f60fc66dd, type: 3}
   _dashSFX: {fileID: 8300000, guid: 02ffa595df53eff43893755178afc4bb, type: 3}
   _destroyBulletSFX: {fileID: 8300000, guid: 59c5463b1b1980d469a83bc794867810, type: 3}
+  _destroyBulletDashSFX: {fileID: 8300000, guid: 692fc2eba935aec4190eebe78d263e71, type: 3}
+  _enemyShootSFX: {fileID: 8300000, guid: fdf2a75adb9e64942a35fa636ce85069, type: 3}
   _enemyDeathSFX: {fileID: 8300000, guid: 17f2f7a3520f0894ba1483804d864e6d, type: 3}
-  _playerDeathSFX: {fileID: 8300000, guid: 1201ba321329fe54cac7f0b1d2ad224d, type: 3}
+  _playerDeathSFX: {fileID: 8300000, guid: 92368856b3adb744c9da098bf8d77e59, type: 3}
+  _playerExplodeSFX: {fileID: 8300000, guid: 1201ba321329fe54cac7f0b1d2ad224d, type: 3}
   _slashSFX: {fileID: 8300000, guid: 4dc0313e737c30d4584fa37bfd96a24f, type: 3}
+  _bigSlashSFX: {fileID: 8300000, guid: ce27aca2682095541b21b9f31dffa047, type: 3}
+  _sheathSFX: {fileID: 8300000, guid: f88a101e85db6174f84d7df5fb4e72ca, type: 3}
+  _shockwaveSFX: {fileID: 8300000, guid: 322d60e50a2d3da43ade8c714c508a51, type: 3}
+  _snapshotSFX: {fileID: 8300000, guid: 57c97524b56ed784fa390acaa69ae84b, type: 3}
+  _snapshot2SFX: {fileID: 8300000, guid: 573bf62ecb31ed94a80ca07921269f35, type: 3}
   _initialPoolSize: 10
   _maxPoolSize: 25
 --- !u!4 &1073483752

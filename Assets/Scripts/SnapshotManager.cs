@@ -129,12 +129,16 @@ public class SnapshotManager : MonoBehaviour
         _quadTop.GetComponent<Rigidbody>().AddForce(direction * -2, 0, 0, ForceMode.Impulse);
         _quadBottom.GetComponent<Rigidbody>().AddForce(direction * 2, 0, 0, ForceMode.Impulse);
     
+        SFXManager.Instance.PlaySnapshot();
+
         yield return new WaitForSeconds(.5f);
     
         _quadTop.GetComponent<Rigidbody>().AddForce(0, Random.Range(5, 8), 0, ForceMode.Impulse);
         _quadBottom.GetComponent<Rigidbody>().AddForce(0, Random.Range(-8, -5), 0, ForceMode.Impulse);
         _quadTop.GetComponent<Rigidbody>().AddTorque(0, 0, Random.Range(-8, -6) * direction, ForceMode.Impulse);
         _quadBottom.GetComponent<Rigidbody>().AddTorque(0, 0, Random.Range(6, 8) * direction, ForceMode.Impulse);
+
+        SFXManager.Instance.PlaySnapshot2();
         
         TMP_Text tx = transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
         tx.color = new Color(1, 1, 1, 0);
